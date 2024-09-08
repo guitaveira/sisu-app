@@ -7,6 +7,7 @@ use app\models\FeedbackSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use webvimark\modules\UserManagement\models\User;
 
 /**
  * FeedbackController implements the CRUD actions for Feedback model.
@@ -71,7 +72,6 @@ class FeedbackController extends Controller
     public function actionCreate()
     {
         $model = new Feedback();
-
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);

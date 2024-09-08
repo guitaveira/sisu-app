@@ -26,7 +26,7 @@ services:
       - ./app:/app
     working_dir: /app
     environment:
-      - PHP_ENABLE_XDEBUG=0
+      - PHP_ENABLE_XDEBUG=1
       - DB_DATABASE= $DB
       - DB_USERNAME= $USER
       - DB_PASSWORD= $PASS
