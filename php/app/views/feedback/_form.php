@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idade')->textInput() ?>
 
-    <?= $form->field($model, 'user_id')->hiddenInput()->label(""); ?>
+    <?= $form->field($model, 'user_id')->hiddenInput()->label("") ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
