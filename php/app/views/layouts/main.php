@@ -42,6 +42,13 @@ AppAsset::register($this);
         'activateParents'=>true,
         'items' => [
             [
+                'label' => 'Feedback',
+                'items'=>[
+                    ['label'=>'Criar', 'url'=>['/feedback/create']],
+                    ['label'=>'Listar', 'url'=>['/feedback/index']],
+                ],
+            ],
+            [
                 'label' => 'Usuário',
                 'items'=>[
                     ['label'=>'Alterar Senha', 'url'=>['/user-management/auth/change-own-password']],
