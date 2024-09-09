@@ -26,7 +26,7 @@ class FeedbackCest
         ]);
     }
 
-    public function errorEmailonAddFeedback(\FunctionalTester $I)
+    public function errorEmailOnAddFeedback(\FunctionalTester $I)
     {
         $I->amOnRoute('feedback/create');
         $I->submitForm('form', [

@@ -3,7 +3,8 @@
 use yii\db\Migration;
 
 /**
- * yii migrate/create add_user_column_to_feedback_table --fields="user_id:integer:notNull:defaultValue(1):foreignKey(user)"
+ * yii migrate/create add_user_column_to_feedback_table
+ * --fields="user_id:integer:notNull:defaultValue(1):foreignKey(user)"
  * Handles adding columns to table `{{%feedback}}`.
  * Has foreign keys to the tables:
  *

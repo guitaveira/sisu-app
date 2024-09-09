@@ -13,6 +13,7 @@ use webvimark\modules\UserManagement\models\User;
  * @property string|null $email
  * @property string|null $feedback
  * @property int|null $idade
+ * @property int|null $user_id
  */
 class Feedback extends \yii\db\ActiveRecord
 {
