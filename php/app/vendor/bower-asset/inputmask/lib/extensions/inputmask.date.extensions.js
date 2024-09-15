@@ -620,50 +620,57 @@ function parse(format, dateObjValue, opts, raw) {
   let mask = "",
     match,
     fcode,
-    ndx = 0;
+    ndx = 0,
+    escaped = false;
   const placeHolder = {};
   getTokenizer(opts).lastIndex = 0;
   while ((match = getTokenizer(opts).exec(format))) {
-    if (dateObjValue === undefined) {
-      if ((fcode = formatcode(match))) {
-        mask += "(" + fcode[0] + ")";
-        // map placeholder to placeholder object and set placeholder mappings
-        if (opts.placeholder && opts.placeholder !== "") {
-          placeHolder[ndx] =
-            opts.placeholder[match.index % opts.placeholder.length];
-          placeHolder[opts.placeholder[match.index % opts.placeholder.length]] =
-            match[0].charAt(0);
-        } else {
-          placeHolder[ndx] = match[0].charAt(0);
-        }
-      } else {
-        switch (match[0]) {
-          case "[":
-            mask += "(";
-            break;
-          case "]":
-            mask += ")?";
-            break;
-          default:
-            mask += escapeRegex(match[0]);
-            placeHolder[ndx] = match[0].charAt(0);
-        }
-      }
+    if (match[0] === "\\") {
+      escaped = true;
     } else {
-      if ((fcode = formatcode(match))) {
-        if (raw !== true && fcode[3]) {
-          const getFn = fcode[3];
-          mask += getFn.call(dateObjValue.date);
-        } else if (fcode[2]) {
-          mask += dateObjValue["raw" + fcode[2]];
+      if (dateObjValue === undefined) {
+        if (!escaped && (fcode = formatcode(match))) {
+          mask += "(" + fcode[0] + ")";
+          // map placeholder to placeholder object and set placeholder mappings
+          if (opts.placeholder && opts.placeholder !== "") {
+            placeHolder[ndx] =
+              opts.placeholder[match.index % opts.placeholder.length];
+            placeHolder[
+              opts.placeholder[match.index % opts.placeholder.length]
+            ] = match[0].charAt(0);
+          } else {
+            placeHolder[ndx] = match[0].charAt(0);
+          }
         } else {
-          mask += match[0];
+          switch (match[0]) {
+            case "[":
+              mask += "(";
+              break;
+            case "]":
+              mask += ")?";
+              break;
+            default:
+              mask += escapeRegex(match[0]);
+              placeHolder[ndx] = match[0].charAt(0);
+          }
         }
       } else {
-        mask += match[0];
+        if (!escaped && (fcode = formatcode(match))) {
+          if (raw !== true && fcode[3]) {
+            const getFn = fcode[3];
+            mask += getFn.call(dateObjValue.date);
+          } else if (fcode[2]) {
+            mask += dateObjValue["raw" + fcode[2]];
+          } else {
+            mask += match[0];
+          }
+        } else {
+          mask += `${escaped ? "\\" : ""}${match[0]}`;
+        }
       }
+      ndx++;
+      escaped = false;
     }
-    ndx++;
   }
   if (dateObjValue === undefined) {
     opts.placeholder = placeHolder;
@@ -772,7 +779,7 @@ Inputmask.extendAliases({
         formatAlias[opts.outputFormat] || opts.outputFormat || opts.inputFormat; // resolve possible formatAlias
       // opts.placeholder = opts.placeholder !== "" ? opts.placeholder : opts.inputFormat.replace(/[[\]]/, "");
       opts.regex = parse(opts.inputFormat, undefined, opts);
-      console.log("inputFormat", opts.regex);
+      // console.log("inputFormat", opts.regex);
       opts.min = analyseMask(opts.min, opts.inputFormat, opts);
       opts.max = analyseMask(opts.max, opts.inputFormat, opts);
       return null; // migrate to regex mask

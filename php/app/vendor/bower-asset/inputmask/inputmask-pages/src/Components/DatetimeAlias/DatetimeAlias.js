@@ -8,6 +8,6 @@ export const DatetimeAlias = () => {
     <MarkDownPage
       className={styles.DatetimeAlias}
       md={documentationMD}
-      data-testid="DatetileAlias"></MarkDownPage>
+      data-testid="DatetimeAlias"></MarkDownPage>
   );
 };

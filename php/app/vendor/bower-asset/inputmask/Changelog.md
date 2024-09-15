@@ -8,6 +8,7 @@
 
 ### Fixed
 
+- it is not possible to use escaped characters as a separator in dates #2791
 - Datetime mask dd.mm.yyyy leading to Uncaught InternalError: too much recursion #2814
 - Autofill shows TypeError in Chrome console. #2809
 - Unmasked value stopped working in version 5.0.9 #2800

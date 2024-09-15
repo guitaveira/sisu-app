@@ -1,5 +1,7 @@
 <?php
 
+
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -13,6 +15,27 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'jwt' => [
+            'class' => \bizley\jwt\Jwt::class,
+            'signer' => \bizley\jwt\Jwt::ES256,
+            'signingKey' => [
+                'key' => '@app/keys/es256.key', // path to your PRIVATE key, you can start the path with @ to indicate this is a Yii alias
+                'passphrase' => 'feedback', // omit it if you are not adding any passphrase
+                'method' => \bizley\jwt\Jwt::METHOD_FILE,
+            ],
+            'verifyingKey' => [ // required for asymmetric keys
+                'key' => '@app/keys/es256.key.pub', // path to your PUBLIC key, you can start the path with @ to indicate this is a Yii alias
+                'passphrase' => 'feedback',
+                'method' => \bizley\jwt\Jwt::METHOD_FILE,
+            ],
+            'validationConstraints' => static function (\bizley\jwt\Jwt $jwt) {
+                $config = $jwt->getConfiguration();
+                return [
+                new \Lcobucci\JWT\Validation\Constraint\SignedWith($config->signer(), $config->verificationKey()),
+                new \Lcobucci\JWT\Validation\Constraint\LooseValidAt(new \Lcobucci\Clock\SystemClock(new \DateTimeZone(\Yii::$app->timeZone)),new \DateInterval('PT10S'))
+                ];
+            }
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wgCzeUntlJ0GcP8dh6z09EPqBTQd97aT',
@@ -25,7 +48,7 @@ $config = [
         ],
         'user' => [
             'class' => 'webvimark\modules\UserManagement\components\UserConfig',
-
+            'identityClass'=> 'app\models\CustomUser',
             // Comment this if you don't want to record user logins
             'on afterLogin' => function($event) {
                 \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
@@ -73,6 +96,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'feed'],
+                'POST auth/login' => 'auth/login',
             ]
         ],
 

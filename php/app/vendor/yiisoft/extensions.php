@@ -48,13 +48,13 @@ return array (
       '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug/src',
     ),
   ),
-  'yiisoft/yii2-bootstrap4' => 
+  'bizley/jwt' => 
   array (
-    'name' => 'yiisoft/yii2-bootstrap4',
-    'version' => 'dev-master',
+    'name' => 'bizley/jwt',
+    'version' => '4.1.1.0',
     'alias' => 
     array (
-      '@yii/bootstrap4' => $vendorDir . '/yiisoft/yii2-bootstrap4/src',
+      '@bizley/jwt' => $vendorDir . '/bizley/jwt/src',
     ),
   ),
 );

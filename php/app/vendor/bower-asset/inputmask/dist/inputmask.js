@@ -3,7 +3,7 @@
  * https://github.com/RobinHerbots/Inputmask
  * Copyright (c) 2010 - 2024 Robin Herbots
  * Licensed under the MIT license
- * Version: 5.0.10-beta.5
+ * Version: 5.0.10-beta.9
  */
 !function(e, t) {
     if ("object" == typeof exports && "object" == typeof module) module.exports = t(); else if ("function" == typeof define && define.amd) define([], t); else {
@@ -304,8 +304,6 @@
                     value: !0
                 }), t.escapeRegex = function(e) {
                     return e.replace(n, "\\$1");
-                }, t.escapeRegexString = function(e) {
-                    return e.replace(n, "\\\\$1");
                 };
                 var n = new RegExp("(\\" + [ "/", ".", "*", "+", "?", "|", "(", ")", "[", "]", "{", "}", "\\", "$", "^" ].join("|\\") + ")", "gim");
             },
@@ -1256,10 +1254,10 @@
                     return !1;
                 }
                 function O(e, t, n, i) {
-                    var r, o, l = "", s = 0, c = {};
-                    for (P(n).lastIndex = 0; r = P(n).exec(e); ) {
-                        if (void 0 === t) if (o = w(r)) l += "(" + o[0] + ")", n.placeholder && "" !== n.placeholder ? (c[s] = n.placeholder[r.index % n.placeholder.length], 
-                        c[n.placeholder[r.index % n.placeholder.length]] = r[0].charAt(0)) : c[s] = r[0].charAt(0); else switch (r[0]) {
+                    var r, o, l = "", s = 0, c = !1, u = {};
+                    for (P(n).lastIndex = 0; r = P(n).exec(e); ) if ("\\" === r[0]) c = !0; else {
+                        if (void 0 === t) if (!c && (o = w(r))) l += "(" + o[0] + ")", n.placeholder && "" !== n.placeholder ? (u[s] = n.placeholder[r.index % n.placeholder.length], 
+                        u[n.placeholder[r.index % n.placeholder.length]] = r[0].charAt(0)) : u[s] = r[0].charAt(0); else switch (r[0]) {
                           case "[":
                             l += "(";
                             break;
@@ -1269,11 +1267,11 @@
                             break;
 
                           default:
-                            l += (0, a.escapeRegex)(r[0]), c[s] = r[0].charAt(0);
-                        } else if (o = w(r)) if (!0 !== i && o[3]) l += o[3].call(t.date); else o[2] ? l += t["raw" + o[2]] : l += r[0]; else l += r[0];
-                        s++;
+                            l += (0, a.escapeRegex)(r[0]), u[s] = r[0].charAt(0);
+                        } else if (!c && (o = w(r))) if (!0 !== i && o[3]) l += o[3].call(t.date); else o[2] ? l += t["raw" + o[2]] : l += r[0]; else l += "".concat(c ? "\\" : "").concat(r[0]);
+                        s++, c = !1;
                     }
-                    return void 0 === t && (n.placeholder = c), l;
+                    return void 0 === t && (n.placeholder = u), l;
                 }
                 function _(e, t, n) {
                     for (e = String(e), t = t || 2; e.length < t; ) e = n ? e + "0" : "0" + e;

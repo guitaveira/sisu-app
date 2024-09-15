@@ -16,19 +16,19 @@ Inputmask with jQuery as dependencylib.
 
 ```html
 <script src="jquery.js"></script>
-<script src="dist/jquery.inputmask.js"></script>
+<script src="jquery.inputmask.js"></script>
 ```
 
 Inputmask with vanilla dependencylib.
 
 ```html
-<script src="dist/inputmask.js"></script>
+<script src="inputmask.js"></script>
 ```
 
 If you like to automatically bind the inputmask to the inputs marked with the data-inputmask- ... attributes you may also want to include the inputmask.binding.js
 
 ```html
-<script src="dist/bindings/inputmask.binding.js"></script>
+<script src="bindings/inputmask.binding.js"></script>
 ```
 
 ### webpack

@@ -32,6 +32,7 @@ services:
       - DB_PASSWORD= $PASS
     ports:
       - "6980:80"
+      - "7443:443"
     #Se seu host roda linux, substitua host.docker.internal com o resultado do comando abaixo executado dentro do container e restarte o container
     ## $ ip route | grep docker0 | awk '{print $9}'
     command: bash -c "chown -R www-data:www-data /app/web
