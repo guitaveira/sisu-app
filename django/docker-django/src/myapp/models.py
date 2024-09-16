@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import  User
 from django.core.exceptions import ValidationError
 import dns.resolver
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 def checkDns(email):
     domain = email.split('@')[1]
@@ -17,13 +19,14 @@ class Feedback(models.Model):
     email = models.EmailField(validators=[checkDns])
     feedback = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     class Meta:
         permissions = [
             ("change_only_yours", "Pode mudar apenas seus dados de Feedback"),
         ]
         managed = True
         db_table = 'feedback'
-
 
 
 class DemoModel(models.Model):

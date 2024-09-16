@@ -9,4 +9,5 @@ router.register(r'feedbacks', FeedbackViewSet)
 urlpatterns = [
     path('feedback/<int:id>/view/', views.feedback_view, name='feedback_view'),
     path('api/', include(router.urls)),
+
 ]
