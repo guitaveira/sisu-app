@@ -29,7 +29,7 @@ class AuthController extends Controller
                 );
             $tokenString = $token->toString();
 
-            return $tokenString ;
+            return ['token' => $tokenString];
         } else {
             throw new UnauthorizedHttpException('Falha ao autenticar. Verifique suas credenciais.');
         }
