@@ -54,8 +54,8 @@ class UserConfig extends User
 	 */
 	protected function afterLogin($identity, $cookieBased, $duration)
 	{
-		AuthHelper::updatePermissions($identity);
-
+		if ( $this->enableSession )
+			AuthHelper::updatePermissions($identity);
 		parent::afterLogin($identity, $cookieBased, $duration);
 	}
 

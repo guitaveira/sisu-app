@@ -17,17 +17,17 @@ $config = [
     'components' => [
         'jwt' => [
             'class' => \bizley\jwt\Jwt::class,
-            'signer' => \bizley\jwt\Jwt::ES256,
+            'signer' => \bizley\jwt\Jwt::HS256,
             'signingKey' => [
-                'key' => '@app/keys/es256.key', // path to your PRIVATE key, you can start the path with @ to indicate this is a Yii alias
-                'passphrase' => 'feedback', // omit it if you are not adding any passphrase
-                'method' => \bizley\jwt\Jwt::METHOD_FILE,
+                'key' =>  ('3fqDh2qnIC2ivJgylGupcH6cejwIszUCdzdqrwPJ+aI='), // path to your PRIVATE key, you can start the path with @ to indicate this is a Yii alias
+                //'passphrase' => 'feedback', // omit it if you are not adding any passphrase
+                'method' => \bizley\jwt\Jwt::METHOD_BASE64,
             ],
-            'verifyingKey' => [ // required for asymmetric keys
+            /*'verifyingKey' => [ // required for asymmetric keys
                 'key' => '@app/keys/es256.key.pub', // path to your PUBLIC key, you can start the path with @ to indicate this is a Yii alias
                 'passphrase' => 'feedback',
                 'method' => \bizley\jwt\Jwt::METHOD_FILE,
-            ],
+            ], */
             'validationConstraints' => static function (\bizley\jwt\Jwt $jwt) {
                 $config = $jwt->getConfiguration();
                 return [
@@ -39,6 +39,8 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wgCzeUntlJ0GcP8dh6z09EPqBTQd97aT',
+            'enableCookieValidation' => false,
+            'enableCsrfCookie' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
@@ -49,10 +51,12 @@ $config = [
         'user' => [
             'class' => 'webvimark\modules\UserManagement\components\UserConfig',
             'identityClass'=> 'app\models\CustomUser',
+            'enableSession' => false,
+            'enableAutoLogin' => false,
             // Comment this if you don't want to record user logins
-            'on afterLogin' => function($event) {
-                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
-            }
+            //'on afterLogin' => function($event) {
+            //    \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
+            //}
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -81,7 +85,7 @@ $config = [
             ],
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => YII_DEBUG ? 20 : 3,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
@@ -89,17 +93,17 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
 
+        'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            //'enableStrictParsing' => true,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'feed'],
                 'POST auth/login' => 'auth/login',
             ]
         ],
-
     ],
     'modules'=>[
         'user-management' => [

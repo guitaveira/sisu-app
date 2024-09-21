@@ -197,7 +197,7 @@
         'egulias/email-validator' => array(
             'pretty_version' => '4.x-dev',
             'version' => '4.9999999.9999999.9999999-dev',
-            'reference' => '92c1ab0cc1d38e188f858cea12bbb90711fa759a',
+            'reference' => 'b4a1a0e5a668ae418aac646ce555edd3f2cb9d96',
             'type' => 'library',
             'install_path' => __DIR__ . '/../egulias/email-validator',
             'aliases' => array(),
@@ -641,7 +641,7 @@
         'symfony/console' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
-            'reference' => '7a7ce2c8b4246fdfc8bd42dff781298edeb54dd2',
+            'reference' => '5b5a0aa66e3296e303e22490f90f521551835a83',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
@@ -723,7 +723,7 @@
         'symfony/mime' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => 'dba5d5f6073baf7a3576b580cc4a208b4ca00553',
+            'reference' => 'abe16ee7790b16aa525877419deb0f113953f0e1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/mime',
             'aliases' => array(),
@@ -795,7 +795,7 @@
         'symfony/process' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => '6fd79ab51c8342aa1f3395b2e704d3aa6ac68c2c',
+            'reference' => '3f94e5f13ff58df371a7ead461b6e8068900fbb3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/process',
             'aliases' => array(),
@@ -815,7 +815,7 @@
         'symfony/string' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => '9982f9ea8bce36766ef9c4572ce0f40a2bf22a14',
+            'reference' => 'f8a1ccebd0997e16112dfecfd74220b78e5b284b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
             'aliases' => array(),
@@ -824,7 +824,7 @@
         'symfony/yaml' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
-            'reference' => '62f96e1cfd4cf518882a36bfedcf1fe4093c1299',
+            'reference' => '7025b964f123bbf1896d7563db6ec7f1f63e918a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),
@@ -905,7 +905,7 @@
         'webvimark/module-user-management' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '18b1ae02586b1bbf015688fc3f4b66e439c4ac4a',
+            'reference' => 'f4a5ab9fd2245fd3d28fe93bdc67343abe7bb3ac',
             'type' => 'library',
             'install_path' => __DIR__ . '/../webvimark/module-user-management',
             'aliases' => array(

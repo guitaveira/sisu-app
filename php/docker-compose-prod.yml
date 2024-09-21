@@ -1,0 +1,36 @@
+version: "3.9"
+
+volumes:
+  dbfiles: {}
+  
+services:
+  db:
+    image: phdcoder/postgresbr
+    restart: always
+    volumes:
+      - dbfiles:/var/lib/postgresql/data/pgdata
+      - ./initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: $USER
+      POSTGRES_DB: $DB
+      POSTGRES_PASSWORD: $PASS
+      PGDATA: /var/lib/postgresql/data/pgdata
+      LANG: pt_BR.utf8
+    ports:
+      - "5475:5432"
+  app:
+    image: e480174a43c4
+    restart: always
+    container_name: pweb-php
+    environment:
+      - PHP_ENABLE_XDEBUG=0
+      - DB_DATABASE= $DB
+      - DB_USERNAME= $USER
+      - DB_PASSWORD= $PASS
+    ports:
+      - "6980:80"
+      - "7443:443"
+    #Se seu host roda linux, substitua host.docker.internal com o resultado do comando abaixo executado dentro do container e restarte o container
+    ## $ ip route | grep docker0 | awk '{print $9}'
+    command: bash -c "./yii migrate --interactive=0
+      && supervisord -c  /etc/supervisor/supervisord.conf"

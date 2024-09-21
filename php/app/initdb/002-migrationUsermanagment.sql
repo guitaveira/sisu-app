@@ -276,16 +276,16 @@ CREATE SEQUENCE user_seq;
 CREATE TABLE IF NOT EXISTS "user" (
   id int NOT NULL DEFAULT NEXTVAL ('user_seq'),
   username varchar(255) NOT NULL,
-  auth_key varchar(32) NOT NULL,
+  auth_key text NOT NULL,
   password_hash varchar(255) NOT NULL,
   confirmation_token varchar(255) DEFAULT NULL,
   status int NOT NULL DEFAULT '1',
   superadmin smallint DEFAULT '0',
   created_at int NOT NULL,
   updated_at int NOT NULL,
-  registration_ip varchar(255) DEFAULT NULL,
-  bind_to_ip varchar(255) DEFAULT NULL,
-  email varchar(128) DEFAULT NULL,
+  registration_ip text DEFAULT NULL,
+  bind_to_ip text DEFAULT NULL,
+  email text DEFAULT NULL,
   email_confirmed smallint NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
 )    ;
@@ -306,14 +306,14 @@ CREATE SEQUENCE user_visit_log_seq;
 
 CREATE TABLE IF NOT EXISTS user_visit_log (
   id int NOT NULL DEFAULT NEXTVAL ('user_visit_log_seq'),
-  token varchar(255) NOT NULL,
-  ip varchar(255) NOT NULL,
-  language char(2) NOT NULL,
-  user_agent varchar(255) NOT NULL,
+  token text NOT NULL,
+  ip text NOT NULL,
+  language text NOT NULL,
+  user_agent text NOT NULL,
   user_id int DEFAULT NULL,
   visit_time int NOT NULL,
-  browser varchar(30) DEFAULT NULL,
-  os varchar(20) DEFAULT NULL,
+  browser text DEFAULT NULL,
+  os text DEFAULT NULL,
   PRIMARY KEY (id)
 )   ;
  
