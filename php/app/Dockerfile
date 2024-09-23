@@ -2,8 +2,7 @@ FROM yiisoftware/yii2-php:8.1-fpm-nginx
 WORKDIR /app
 COPY . .
 
-RUN chmod -R 777 /app/web/assets 
-RUN chmod -R 777 /app/runtime
-
-RUN composer install --no-dev
-RUN composer dumpautoload -o
+RUN mkdir -p uploads
+RUN chmod -R 775 uploads assets runtime
+RUN composer install --optimize-autoloader --no-dev
+RUN composer clear-cache

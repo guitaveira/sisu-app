@@ -22,11 +22,11 @@ services:
     ports:
       - "5475:5432"
   app:
-    image: e480174a43c4a950d2849b0ba0a7cc70f5a3a5c1b0d3c32eed62945f898db3ef
+    image: phdcoder/pweb2022
     restart: always
     container_name: pweb-php
     volumes:
-      - uploads:/app/upload
+      - uploads:/app/uploads
       - runtime:/app/runtime
       - assets:/app/web/assets
     environment:

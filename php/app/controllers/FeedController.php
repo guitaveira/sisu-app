@@ -10,9 +10,9 @@ class FeedController extends ActiveController
         return array_merge(
             parent::behaviors(),
             [
-                /*'ghost-access'=> [
+                'ghost-access'=> [
                     'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
-                ],*/
+                ],
                 'authenticator' => [
                     'class' => \bizley\jwt\JwtHttpBearerAuth::class,
                 ],

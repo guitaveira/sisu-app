@@ -20,7 +20,8 @@
         "yiisoft/yii2-symfonymailer": "~2.0.3",
         "webvimark/module-user-management": "dev-master",
         "bizley/jwt": "^4.0",
-        "lcobucci/clock": "3.0.x-dev"
+        "lcobucci/clock": "3.0.x-dev",
+        "mootensai/yii2-enhanced-gii": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -74,6 +75,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/phdcoder/webvimark"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/optmsp/yii2-enhanced-gii"
         },
         {
             "type": "composer",

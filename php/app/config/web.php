@@ -1,7 +1,5 @@
 <?php
 
-
-
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -39,8 +37,8 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wgCzeUntlJ0GcP8dh6z09EPqBTQd97aT',
-            'enableCookieValidation' => false,
-            'enableCsrfCookie' => false,
+            //'enableCookieValidation' => false,
+            //'enableCsrfCookie' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
@@ -51,8 +49,8 @@ $config = [
         'user' => [
             'class' => 'webvimark\modules\UserManagement\components\UserConfig',
             'identityClass'=> 'app\models\CustomUser',
-            'enableSession' => false,
-            'enableAutoLogin' => false,
+            //'enableSession' => false,
+            //'enableAutoLogin' => false,
             // Comment this if you don't want to record user logins
             //'on afterLogin' => function($event) {
             //    \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
@@ -106,6 +104,14 @@ $config = [
         ],
     ],
     'modules'=>[
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
+            // see settings on http://demos.krajee.com/grid#module
+        ],
+        'datecontrol' => [
+            'class' => '\kartik\datecontrol\Module',
+            // see settings on http://demos.krajee.com/datecontrol#module
+        ],
         'user-management' => [
             'class' => 'webvimark\modules\UserManagement\UserManagementModule',
 

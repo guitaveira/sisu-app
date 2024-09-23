@@ -33,7 +33,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
     protected $arguments = [];
     protected $interactive = true;
 
-    public function __construct(?InputDefinition $definition = null)
+    public function __construct(InputDefinition $definition = null)
     {
         if (null === $definition) {
             $this->definition = new InputDefinition();
@@ -88,9 +88,9 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function setInteractive(bool $interactive)
+    public function setInteractive($interactive)
     {
-        $this->interactive = $interactive;
+        $this->interactive = (bool) $interactive;
     }
 
     /**
@@ -104,19 +104,19 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function getArgument(string $name)
+    public function getArgument($name)
     {
         if (!$this->definition->hasArgument($name)) {
             throw new InvalidArgumentException(sprintf('The "%s" argument does not exist.', $name));
         }
 
-        return $this->arguments[$name] ?? $this->definition->getArgument($name)->getDefault();
+        return isset($this->arguments[$name]) ? $this->arguments[$name] : $this->definition->getArgument($name)->getDefault();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setArgument(string $name, $value)
+    public function setArgument($name, $value)
     {
         if (!$this->definition->hasArgument($name)) {
             throw new InvalidArgumentException(sprintf('The "%s" argument does not exist.', $name));
@@ -128,7 +128,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function hasArgument(string $name)
+    public function hasArgument($name)
     {
         return $this->definition->hasArgument($name);
     }
@@ -144,16 +144,8 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function getOption(string $name)
+    public function getOption($name)
     {
-        if ($this->definition->hasNegation($name)) {
-            if (null === $value = $this->getOption($this->definition->negationToName($name))) {
-                return $value;
-            }
-
-            return !$value;
-        }
-
         if (!$this->definition->hasOption($name)) {
             throw new InvalidArgumentException(sprintf('The "%s" option does not exist.', $name));
         }
@@ -164,13 +156,9 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function setOption(string $name, $value)
+    public function setOption($name, $value)
     {
-        if ($this->definition->hasNegation($name)) {
-            $this->options[$this->definition->negationToName($name)] = !$value;
-
-            return;
-        } elseif (!$this->definition->hasOption($name)) {
+        if (!$this->definition->hasOption($name)) {
             throw new InvalidArgumentException(sprintf('The "%s" option does not exist.', $name));
         }
 
@@ -180,17 +168,19 @@ abstract class Input implements InputInterface, StreamableInputInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOption(string $name)
+    public function hasOption($name)
     {
-        return $this->definition->hasOption($name) || $this->definition->hasNegation($name);
+        return $this->definition->hasOption($name);
     }
 
     /**
      * Escapes a token through escapeshellarg if it contains unsafe chars.
      *
+     * @param string $token
+     *
      * @return string
      */
-    public function escapeToken(string $token)
+    public function escapeToken($token)
     {
         return preg_match('{^[\w-]+$}', $token) ? $token : escapeshellarg($token);
     }

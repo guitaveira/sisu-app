@@ -1,6 +1,6 @@
 <?php
 
-if (getenv('PHP_ENABLE_XDEBUG')==1) {
+if (getenv('PHP_ENABLE_XDEBUG')==1 ) {
     defined('YII_DEBUG') or define('YII_DEBUG', true);
     defined('YII_ENV') or define('YII_ENV', 'dev');
 }
