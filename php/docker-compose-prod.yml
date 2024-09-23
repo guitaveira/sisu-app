@@ -2,6 +2,9 @@ version: "3.9"
 
 volumes:
   dbfiles: {}
+  uploads: {}
+  runtime: {}
+  assets: {}
   
 services:
   db:
@@ -19,17 +22,21 @@ services:
     ports:
       - "5475:5432"
   app:
-    image: e480174a43c4
+    image: e480174a43c4a950d2849b0ba0a7cc70f5a3a5c1b0d3c32eed62945f898db3ef
     restart: always
     container_name: pweb-php
+    volumes:
+      - uploads:/app/upload
+      - runtime:/app/runtime
+      - assets:/app/web/assets
     environment:
       - PHP_ENABLE_XDEBUG=0
       - DB_DATABASE= $DB
       - DB_USERNAME= $USER
       - DB_PASSWORD= $PASS
     ports:
-      - "6980:80"
-      - "7443:443"
+      - "80:80"
+      - "443:443"
     #Se seu host roda linux, substitua host.docker.internal com o resultado do comando abaixo executado dentro do container e restarte o container
     ## $ ip route | grep docker0 | awk '{print $9}'
     command: bash -c "./yii migrate --interactive=0
