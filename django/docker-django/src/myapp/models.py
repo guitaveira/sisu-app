@@ -24,6 +24,12 @@ class Feedback(models.Model):
     class Meta:
         permissions = [
             ("change_only_yours", "Pode mudar apenas seus dados de Feedback"),
+            ("feedback_list", "Pode Listar todos Feedbacks na API"),
+            ("feedback_retrieve", "Pode recuperar um registro Feedbacks na API"),
+            ("feedback_update", "Pode atualizar Feedbacks na API"),
+            ("feedback_partial_update", "Pode atualizar parcialmente Feedbacks na API"),
+            ("feedback_create", "Pode criar Feedbacks na API"),
+            ("feedback_destroy", "Pode destruir Feedbacks na API"),
         ]
         managed = True
         db_table = 'feedback'

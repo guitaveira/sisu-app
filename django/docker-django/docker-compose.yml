@@ -34,6 +34,7 @@ services:
       - ./.envs/.django
     networks:
       - djangonetwork
+    command: sh -c "python manage.py collectstatic --no-input; python manage.py migrate; gunicorn --reload mydjango.wsgi -b 0.0.0.0:8000 & celery --app myapp.tasks worker --loglevel=INFO"
   db:
     build:
       context: .
