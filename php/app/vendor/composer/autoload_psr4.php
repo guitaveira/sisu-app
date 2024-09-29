@@ -24,7 +24,7 @@ return array(
     'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
     'mootensai\\relation\\' => array($vendorDir . '/mootensai/yii2-relation-trait'),
     'mootensai\\enhancedgii\\' => array($vendorDir . '/mootensai/yii2-enhanced-gii'),
-    'mootensai\\components\\' => array($vendorDir . '/mootensai/yii2-optimistic-lock-validator', $vendorDir . '/mootensai/yii2-jsblock'),
+    'mootensai\\components\\' => array($vendorDir . '/mootensai/yii2-jsblock', $vendorDir . '/mootensai/yii2-optimistic-lock-validator'),
     'mootensai\\behaviors\\' => array($vendorDir . '/mootensai/yii2-uuid-behavior'),
     'kartik\\widgets\\' => array($vendorDir . '/kartik-v/yii2-widgets/src'),
     'kartik\\typeahead\\' => array($vendorDir . '/kartik-v/yii2-widget-typeahead/src'),

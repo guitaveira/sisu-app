@@ -77,10 +77,6 @@
             "url": "https://github.com/phdcoder/webvimark"
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/optmsp/yii2-enhanced-gii"
-        },
-        {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }

@@ -16,16 +16,36 @@ if ($generator->nsModel !== $generator->queryNs) {
 echo "<?php\n";
 ?>
 
-namespace <?= $generator->queryNs ?>\base;
-
-use common\components\activerecord\cache\traits\ActiveQueryCacheTrait;
+namespace <?= $generator->queryNs ?>;
 
 /**
-* This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
-*
-* @see <?= $modelFullClassName . "\n" ?>
-*/
+ * This is the ActiveQuery class for [[<?= $modelFullClassName ?>]].
+ *
+ * @see <?= $modelFullClassName . "\n" ?>
+ */
 class <?= $className ?> extends <?= '\\' . ltrim($generator->queryBaseClass, '\\') . "\n" ?>
 {
-use ActiveQueryCacheTrait;
+    /*public function active()
+    {
+        $this->andWhere('[[status]]=1');
+        return $this;
+    }*/
+
+    /**
+     * @inheritdoc
+     * @return <?= $modelFullClassName ?>[]|array
+     */
+    public function all($db = null)
+    {
+        return parent::all($db);
+    }
+
+    /**
+     * @inheritdoc
+     * @return <?= $modelFullClassName ?>|array|null
+     */
+    public function one($db = null)
+    {
+        return parent::one($db);
+    }
 }

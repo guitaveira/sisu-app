@@ -64,13 +64,6 @@ use <?= ltrim($generator->nsModel . '\\' . $modelClass, '\\') . (isset($modelAli
     public function search($params)
     {
         $query = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find();
-        <?php
-          if (isset($generator->webUserColName)) {
-               $user_col_name = $generator->webUserColName;
-               $where = "['$user_col_name'=>Yii::\$app->user->id]";
-               echo "\$query->andWhere($where);\n";
-          }
-        ?>
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

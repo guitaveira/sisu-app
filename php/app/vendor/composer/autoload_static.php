@@ -251,8 +251,8 @@ class ComposerStaticInit743be01fce606022e2a861eca581fc85
         ),
         'mootensai\\components\\' => 
         array (
-            0 => __DIR__ . '/..' . '/mootensai/yii2-optimistic-lock-validator',
-            1 => __DIR__ . '/..' . '/mootensai/yii2-jsblock',
+            0 => __DIR__ . '/..' . '/mootensai/yii2-jsblock',
+            1 => __DIR__ . '/..' . '/mootensai/yii2-optimistic-lock-validator',
         ),
         'mootensai\\behaviors\\' => 
         array (

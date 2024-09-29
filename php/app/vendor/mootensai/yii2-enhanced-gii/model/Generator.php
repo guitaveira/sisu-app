@@ -146,13 +146,13 @@ class Generator extends BaseGenerator {
                 class.',
             'nameAttribute' => 'This is the (set) of name column that you use to show as label, '
                 . 'separated by comma (,) for multiple table(asterisk on Table Name).',
-            'skippedColumns' => 'Fill this field with the column name that you dont want to generate form & labels for the table.
+            'skippedColumns' => 'Fill this field with the column name that you dont want to generate form & labels for the table. 
                 You can fill multiple columns, separated by comma (,). You may specify the column name
                 although "Table Name" ends with asterisk, in which case all columns will not be generated at all models & CRUD.',
             'skippedRelations' => 'Fill this field with the relation name that you dont want to generate CRUD for the table.
                 You can fill multiple relations, separated by comma (,). You do not need to specify the class name
                 if "Table Name" ends with asterisk, in which case all relations will be generated.',
-            'hiddenColumns' => 'Fill this field with the column name that you want to generate form with the hidden field of the table.
+            'hiddenColumns' => 'Fill this field with the column name that you want to generate form with the hidden field of the table. 
                 You can fill multiple columns, separated by comma (,). You may specify the column name
                 although "Table Name" ends with asterisk, in which case all columns will be generated with hidden field at the forms',
             'nsModel' => 'This is the namespace of the ActiveRecord class to be generated, e.g., <code>app\models</code>',
@@ -345,10 +345,7 @@ class Generator extends BaseGenerator {
                     'modelClassName' => $modelClassName,
                 ];
                 $files[] = new CodeFile(
-                    Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/base/' . $queryClassName . '.php', $this->render('query.php', $params)
-                );
-                $files[] = new CodeFile(
-                    Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/' . $queryClassName . '.php', $this->render('query-extended.php', $params)
+                    Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/' . $queryClassName . '.php', $this->render('query.php', $params)
                 );
             }
 
@@ -460,14 +457,8 @@ class Generator extends BaseGenerator {
                 case Schema::TYPE_DATETIME:
                 case Schema::TYPE_TIMESTAMP:
                     $types['safe'][] = $column->name;
-		    break;
-		case Schema::TYPE_TINYINT:
-		    echo "default.. column: " . $column->name . "\n";
-		    echo "type: " . $column->type . "\n";
-                    $types['boolean'][] = $column->name;
-		    break;
-		default: // strings
-
+                    break;
+                default: // strings
                     if ($column->size > 0) {
                         $lengths[$column->size][] = $column->name;
                     } else {

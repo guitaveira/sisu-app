@@ -3,8 +3,6 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-use mootensai\enhancedgii\crud\Generator;
-
 /* @var $this yii\web\View */
 /* @var $generator mootensai\enhancedgii\crud\Generator */
 $urlParams = $generator->generateUrlParams();
@@ -12,14 +10,6 @@ $tableSchema = $generator->getTableSchema();
 $fk = $generator->generateFK($tableSchema);
 echo "<?php\n";
 ?>
-
-/**
- * CREATED BY A CODE GENERATOR!!!!
- * THIS FILE WAS CREATED BY A HEAVILY MODIFIED yii2-enhanced-gii for use in GRS.
- * Hand editing this file will result in lost code.
- *
- * _pdf.php
- */
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -35,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
 
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-sm-9">
             <h2><?= "<?= " ?><?= $generator->generateString(Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>.' '. Html::encode($this->title) ?></h2>
         </div>
     </div>
@@ -43,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?= "<?php \n" ?>
     $gridColumn = [
-<?php
+<?php 
 if ($tableSchema === false) {
     foreach ($generator->getColumnNames() as $name) {
         if (++$count < 6) {
@@ -63,12 +53,12 @@ if ($tableSchema === false) {
     echo DetailView::widget([
         'model' => $model,
         'attributes' => $gridColumn
-    ]);
+    ]); 
 ?>
     </div>
 <?php foreach ($relations as $name => $rel): ?>
 <?php if ($rel[2] && isset($rel[3]) && !in_array($name, $generator->skippedRelations)): ?>
-
+    
     <div class="row">
 <?= "<?php\n" ?>
 if($provider<?= $rel[1] ?>->totalCount){
@@ -79,7 +69,7 @@ if($provider<?= $rel[1] ?>->totalCount){
         $fkRel = $generator->generateFK($relTableSchema);
         if ($relTableSchema === false) {
             foreach ($relTableSchema->getColumnNames() as $attribute) {
-                if (!in_array($attribute, $generator->skippedColumns) && $attribute != $relations[Generator::REL_FOREIGN_KEY]){
+                if (!in_array($attribute, $generator->skippedColumns) && $attribute != $relations[5]){
                     echo "        '" . $attribute . "',\n";
                 }
             }
@@ -95,7 +85,7 @@ if($provider<?= $rel[1] ?>->totalCount){
     echo Gridview::widget([
         'dataProvider' => $provider<?= $rel[1] ?>,
         'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
+            'type' => GridView::TYPE_PRIMARY,
             'heading' => Html::encode(<?= $generator->generateString(Inflector::camel2words($rel[1])) ?>),
         ],
         'panelHeadingTemplate' => '<h4>{heading}</h4>{summary}',

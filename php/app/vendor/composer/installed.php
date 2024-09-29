@@ -42,7 +42,7 @@
         'bower-asset/inputmask' => array(
             'pretty_version' => '5.x-dev',
             'version' => '5.9999999.9999999.9999999-dev',
-            'reference' => 'e77130b0c550d7dae7121e3386c43efa6265dd5d',
+            'reference' => 'dfb4360fd9f83a147a5a50a1ba470888527818c7',
             'type' => 'bower-asset',
             'install_path' => __DIR__ . '/../bower-asset/inputmask',
             'aliases' => array(),
@@ -654,7 +654,7 @@
         'mootensai/yii2-enhanced-gii' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '54668f3e99fc4766996048d9b6831bea9700b175',
+            'reference' => 'a00e4e19fe191da621a2291db95634942039f7bf',
             'type' => 'yii2-extension',
             'install_path' => __DIR__ . '/../mootensai/yii2-enhanced-gii',
             'aliases' => array(
@@ -792,7 +792,7 @@
         'phpoffice/phpspreadsheet' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'c91c8c9a62299d3cc0f3b5af7c6311ecba06223d',
+            'reference' => '498afe2b86392ff0ed08e080473e7f462d208190',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpoffice/phpspreadsheet',
             'aliases' => array(
@@ -1135,7 +1135,7 @@
         'select2/select2' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '07bd61a0e8b928d490c86f61d6abbdcb61f4bbd4',
+            'reference' => '595494a72fee67b0a61c64701cbb72e3121f97b9',
             'type' => 'component',
             'install_path' => __DIR__ . '/../select2/select2',
             'aliases' => array(
@@ -1173,7 +1173,7 @@
         'symfony/css-selector' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
-            'reference' => 'ea43887e9afd2029509662d4f95e8b5ef6fc9bbb',
+            'reference' => '4f7f3c35fba88146b56d0025d20ace3f3901f097',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/css-selector',
             'aliases' => array(),
@@ -1211,7 +1211,7 @@
         'symfony/event-dispatcher' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
-            'reference' => 'a54e2a8a114065f31020d6a89ede83e34c3b27a4',
+            'reference' => '72982eb416f61003e9bb6e91f8b3213600dcf9e9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/event-dispatcher',
             'aliases' => array(),
@@ -1237,7 +1237,7 @@
         'symfony/finder' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
-            'reference' => 'ae25a9145a900764158d439653d5630191155ca0',
+            'reference' => '0412e29064bc287227f46a05016a4941fbb2b88c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/finder',
             'aliases' => array(),
@@ -1246,7 +1246,7 @@
         'symfony/mailer' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => 'b6a25408c569ae2366b3f663a4edad19420a9c26',
+            'reference' => 'c2f7e0d8d7ac8fe25faccf5d8cac462805db2663',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/mailer',
             'aliases' => array(),
@@ -1255,7 +1255,7 @@
         'symfony/mime' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => 'abe16ee7790b16aa525877419deb0f113953f0e1',
+            'reference' => '108ffe36b41cdf56717d2c3f07f4a61410e8ece0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/mime',
             'aliases' => array(),
@@ -1309,7 +1309,7 @@
         'symfony/process' => array(
             'pretty_version' => '6.4.x-dev',
             'version' => '6.4.9999999.9999999-dev',
-            'reference' => '3f94e5f13ff58df371a7ead461b6e8068900fbb3',
+            'reference' => '1f9f59b46880201629df3bd950fc5ae8c55b960f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/process',
             'aliases' => array(),
@@ -1421,7 +1421,7 @@
         'yiisoft/yii2' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1c5d6a7cf7bf1f85448b8f682d6a720d15b67280',
+            'reference' => '3eb31d6321f2a54fcfc4eb1d51074007844f1ada',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yiisoft/yii2',
             'aliases' => array(

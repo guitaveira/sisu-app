@@ -11,7 +11,6 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
-use yii\helpers\ArrayHelper;
 
 /**
  * Generates Relational CRUD
@@ -25,32 +24,11 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
 
     public $nameAttribute = 'name, title, username';
     public $hiddenColumns = 'id, lock';
-
-    public $theme_select2 = '\\kartik\\widgets\\Select2::THEME_MATERIAL';
-
     public $skippedColumns = 'created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';
-    public $skippedIndexColumns;
-    public $skippedColumnsInCreate;
-    public $skippedColumnsInUpdate;
-
     public $nsModel = 'app\models';
     public $nsSearchModel = 'app\models';
-
     public $generateSearchModel;
-    public $disableAdvancedSearch = false;
     public $searchModelClass;
-    
-    public $editFormDepFields;
-    public $editFormDepFieldList;
-
-    public $allowDeleteWithRelated;
-    public $allowDeleteWithRelatedList;
-
-    public $fieldNameStrip = "psa";
-
-    // defines the default User that owns a record; not the same as created_by, updated_by, etc..
-    public $webUserColName;
-
     public $generateQuery = true;
     public $queryNs = 'app\models';
     public $queryClass;
@@ -58,52 +36,6 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $generateLabelsFromComments = false;
     public $useTablePrefix = false;
     public $generateRelations = true;
-    
-    public $detailViewFormatCode;
-    public $detailViewValueCode;
-    public $detailViewFormatCodeList;
-    public $detailViewValueCodeList;
-
-    // will we show 1-to-1 relation details in the View view??
-    public $relationsShowSubDetailsInView = true;
-    // if 0, show as many as we can
-    public $relationsShowSubDetailsColCount = 0;
-
-    public $manyRelationsHiddenFieldTweak;
-    public $manyRelationsHiddenFieldTweakList;
-
-    // if 0, show as many as we can
-    public $relationsExpandableRelatedColumns;
-    public $relationsExpandableRelatedColList;
-
-    public $relationsExpandableRelatedActions = "{view} {update} {delete}";
-    public $indexAllowedActions = "{view} {update}";
-
-    // can we edit relations during the Update view??
-    public $manyRelationsAllowedInView;
-    public $manyRelationsAllowedInEdit;
-
-    public $manyRelationsEditQueryTweak;
-    public $tweakRules;
-
-    public $disableCreate = false;
-    public $disableView = false;
-    public $disableDelete = false;
-    public $disableUpdate = false;
-    public $disableIndex = false;
-    public $disableSaveAsNew = true;
-    public $disableViewDelete = false;
-
-    // overrides default columns for index View
-    public $indexViewColumns = [];
-
-    public $manyRelationsEditFields = "";
-    public $manyRelationsViewFields = "";
-    public $manyRelationsEditFieldList;
-    public $manyRelationsViewFieldList;
-
-    public $extraCreateButton;
-
     public $generateMigrations = true;
     public $optimisticLock = 'lock';
     public $createdAt = 'created_at';
@@ -117,7 +49,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $deletedAt = 'deleted_at';
     public $nsController = 'app\controllers';
     public $controllerClass;
-    public $pluralize = true;
+    public $pluralize;
     public $loggedUserOnly;
     public $expandable;
     public $cancelable;
@@ -167,25 +99,6 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             [['indexWidgetType'], 'in', 'range' => ['grid', 'list']],
 //            [['modelClass'], 'validateModelClass'],
             [['enableI18N', 'generateRelations', 'generateSearchModel', 'pluralize', 'expandable', 'cancelable', 'pdf', 'loggedUserOnly'], 'boolean'],
-            [['relationsShowSubDetailsInView'], 'boolean'],
-            [['disableAdvancedSearch'], 'boolean'],
-            [['relationsShowSubDetailsColCount'], 'integer'],
-            [['relationsExpandableRelatedColumns', 'manyRelationsHiddenFieldTweak'], 'string'],
-            [['relationsExpandableRelatedActions'], 'string'],
-            [['manyRelationsAllowedInEdit'], 'string'],
-            [['extraCreateButton'], 'string'],
-            [['manyRelationsAllowedInView'], 'string'],
-            [['manyRelationsEditQueryTweak'], 'string'],
-            [['detailViewFormatCode', 'detailViewValueCode'], 'string'],
-            [['indexViewColumns'], 'string'],
-            [['skippedIndexColumns'], 'string'],
-            [['allowDeleteWithRelated'], 'string'],
-            [['manyRelationsEditFields', 'manyRelationsViewFields'], 'string'],
-            [['disableCreate', 'disableUpdate', 'disableView', 'disableDelete', 'disableIndex', 'disableViewDelete'], 'boolean'],
-            [['skippedColumnsInCreate'], 'string'],
-            [['skippedColumnsInUpdate'], 'string'],
-            [['editFormDepFields'], 'string'],
-            [['webUserColName'], 'string'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
             [['viewPath', 'skippedRelations', 'skippedColumns',
                 'controllerClass', 'blameableValue', 'nameAttribute',
@@ -360,90 +273,21 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         return ['controller.php'];
     }
 
-    private function explodeCmdLineParameter(string $value, int $expectedGroups, string $rowSep = ";", string $groupSep = ":", $colSep = ",")
-    {
-        if (isset($value) && strlen($value)) {
-            $rowData = explode($rowSep, $value);
-            $rowData = array_filter($rowData);
-        }
-        else {
-            return array();
-        }
-
-        $finalArray = array();
-        for ($curRow = 0; $curRow < count($rowData); $curRow++) {
-            $row = $rowData[$curRow];
-
-            $groups = explode($groupSep, $row);
-            $groupsCount = count($groups);
-            if ($groupsCount != $expectedGroups) {
-                echo "Bad row, bad group count ($groupsCount != $expectedGroups) : $row\n";
-                exit(1);
-            }
-
-            $namingList = array();
-            for ($curCol = 0; $curCol < $groupsCount - 1; $curCol++) {
-                array_push($namingList, $groups[$curCol]);
-            }
-
-            $dataCol = $groups[$groupsCount - 1];
-            $dataList = explode($colSep, $dataCol);
-
-            ArrayHelper::setValue($finalArray, $namingList, $dataList);
-        }
-
-        return array_filter($finalArray);
-    }
-
     /**
      * @inheritdoc
      */
-
     public function generate()
     {
         $files = [];
         $relations = $this->generateRelations();
         $this->relations = $relations;
         $db = $this->getDbConnection();
-
         $this->nameAttribute = ($this->nameAttribute) ? explode(',', str_replace(' ', '', $this->nameAttribute)) : [$this->nameAttribute];
         $this->hiddenColumns = ($this->hiddenColumns) ? explode(',', str_replace(' ', '', $this->hiddenColumns)) : [$this->hiddenColumns];
-
         $this->skippedColumns = ($this->skippedColumns) ? explode(',', str_replace(' ', '', $this->skippedColumns)) : [$this->skippedColumns];
-        $this->skippedColumnsInCreate = ($this->skippedColumnsInCreate) ? explode(',', str_replace(' ', '', $this->skippedColumnsInCreate)) : [$this->skippedColumnsInCreate];
-        $this->skippedColumnsInUpdate = ($this->skippedColumnsInUpdate) ? explode(',', str_replace(' ', '', $this->skippedColumnsInUpdate)) : [$this->skippedColumnsInUpdate];
-        $this->skippedIndexColumns = ($this->skippedIndexColumns) ? explode(',', str_replace(' ', '', $this->skippedIndexColumns)) : [$this->skippedIndexColumns];
         $this->skippedRelations = ($this->skippedRelations) ? explode(',', str_replace(' ', '', $this->skippedRelations)) : [$this->skippedRelations];
-        $this->manyRelationsAllowedInEdit = ($this->manyRelationsAllowedInEdit) ? explode(',', str_replace(' ', '', $this->manyRelationsAllowedInEdit)) : [$this->manyRelationsAllowedInEdit];
-        $this->manyRelationsAllowedInView = ($this->manyRelationsAllowedInView) ? explode(',', str_replace(' ', '', $this->manyRelationsAllowedInView)) : [$this->manyRelationsAllowedInView];
-
-        $this->allowDeleteWithRelatedList = ($this->allowDeleteWithRelated) ? explode(',', str_replace(' ', '', $this->allowDeleteWithRelated)) : [$this->allowDeleteWithRelated];
-        $this->allowDeleteWithRelatedList = array_filter($this->allowDeleteWithRelatedList);
-        
-        $this->detailViewFormatCodeList = $this->explodeCmdLineParameter($this->detailViewFormatCode, 2);
-        $this->detailViewValueCodeList = $this->explodeCmdLineParameter($this->detailViewValueCode, 2, '!', '#', '?');
-
-        $this->tweakRules = $this->explodeCmdLineParameter($this->manyRelationsEditQueryTweak, 3);
-        $this->relationsExpandableRelatedColList = $this->explodeCmdLineParameter($this->relationsExpandableRelatedColumns, 2);
-        $this->manyRelationsHiddenFieldTweakList = $this->explodeCmdLineParameter($this->manyRelationsHiddenFieldTweak, 3, ';', '#');
-
-        $this->manyRelationsEditFieldList = $this->explodeCmdLineParameter($this->manyRelationsEditFields, 2);
-        $this->manyRelationsViewFieldList = $this->explodeCmdLineParameter($this->manyRelationsViewFields, 2);
-
         $this->skippedColumns = array_filter($this->skippedColumns);
-        $this->skippedColumnsInCreate = array_filter($this->skippedColumnsInCreate);
-        $this->skippedColumnsInUpdate = array_filter($this->skippedColumnsInUpdate);
-        $this->skippedIndexColumns = array_filter($this->skippedIndexColumns);
         $this->skippedRelations = array_filter($this->skippedRelations);
-        $this->manyRelationsAllowedInEdit = array_filter($this->manyRelationsAllowedInEdit);
-        $this->manyRelationsAllowedInView = array_filter($this->manyRelationsAllowedInView);
-        
-        $this->editFormDepFieldList = $this->explodeCmdLineParameter($this->editFormDepFields, 2);
-
-        if (isset($this->webUserColName) && ! strlen($this->webUserColName)) {
-            $this->webUserColName = null;
-        }
-
         foreach ($this->getTableNames() as $tableName) {
             // model :
             if (strpos($this->tableName, '*') !== false) {
@@ -529,19 +373,19 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-
+            
             if ($this->pdf) {
                 $files[] = new CodeFile("$viewPath/_pdf.php", $this->render("views/_pdf.php", [
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-
+            
             if($this->saveAsNew){
                 $files[] = new CodeFile("$viewPath/saveAsNew.php", $this->render("views/saveAsNew.php", [
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-
+            
             if (isset($relations[$tableName]) && !$isTree) {
                 if ($this->expandable) {
                     $files[] = new CodeFile("$viewPath/_detail.php", $this->render("views/_detail.php", [
@@ -684,11 +528,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (in_array($attribute, $this->hiddenColumns)) {
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
-
-        $column = $tableSchema->columns[$attribute];
-        //$humanize = Inflector::humanize($rel[Generator::REL_TABLE]);
-        $humanize = (! $column->allowNull ? "-- required --" : "");
-
+        $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "";
@@ -696,53 +536,21 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "'$attribute',\n";
             }
         }
-
+        $column = $tableSchema->columns[$attribute];
         $format = $this->generateColumnFormat($column);
 //        if($column->autoIncrement){
 //            return "";
 //        } else
         if (array_key_exists($attribute, $fk)) {
             $rel = $fk[$attribute];
-            $labelCol = $this->getNameAttributeFK($rel[Generator::REL_TABLE]);
-//            $humanize = Inflector::humanize($rel[Generator::REL_TABLE]);
+            $labelCol = $this->getNameAttributeFK($rel[3]);
+//            $humanize = Inflector::humanize($rel[3]);
 //            $id = 'grid-' . Inflector::camel2id(StringHelper::basename($this->searchModelClass)) . '-' . $attribute;
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
-
-            $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_FOREIGN_KEY]);
-            $humanize = ucwords(Inflector::humanize($finalName));
-
-            //if (in_array("rule_id", $this->detailViewFormatCodeList)) {
-            if (ArrayHelper::keyExists($attribute, $this->detailViewFormatCodeList)) {
-                $formatValue = $this->detailViewFormatCodeList[$attribute][0];
-            }
-            else {
-                $formatValue = "text";
-            }
-            //if (in_array("rule_id", $this->detailViewFormatCodeList)) {
-            if (ArrayHelper::keyExists($attribute, $this->detailViewValueCodeList)) {
-                $valueLine = "'value' => " . $this->detailViewValueCodeList[$attribute][0] . ",";
-            }
-            else {
-                $valueLine = null;
-            }
-            
-            $output = "
-                [
-                    'attribute' => '$rel[7].$labelCol',
-                    'label' => '$humanize',
-                    'format' => '$formatValue',
-                    $valueLine
-                ],\n";
-
-            return $output;
-        }
-        elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
-            //return "\$form->field($model, '$attribute')->checkbox()";
-                $output = "
-                [
-                    'attribute' => '$attribute',
-                    'format' => 'boolean'
-                ],";
+            $output = "[
+            'attribute' => '$rel[7].$labelCol',
+            'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
+        ],\n";
             return $output;
         } else {
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
@@ -781,16 +589,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             if ($rel[self::REL_CLASS] == $baseClass) {
                 return "";
             }
-            $labelCol = $this->getNameAttributeFK($rel[Generator::REL_TABLE]);
+            $labelCol = $this->getNameAttributeFK($rel[3]);
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
-
-            $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_FOREIGN_KEY]);
-            $humanize = ucwords(Inflector::humanize($finalName));
-
             $output = "[
                 'attribute' => '$rel[7].$labelCol',
-                'label' => '$humanize',
-            ],";
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . "
+            ],\n";
             return $output;
         } else {
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
@@ -813,50 +617,28 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
 //        $humanize = Inflector::humanize($attribute, true);
-
-        $column = $tableSchema->columns[$attribute];
-
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "";
-            }
-            else
-            {
+            } else {
                 return "'$attribute',\n";
             }
         }
-
+        $column = $tableSchema->columns[$attribute];
         $format = $this->generateColumnFormat($column);
-
 //        if($column->autoIncrement){
 //            return "";
 //        } else
-        if (array_key_exists($attribute, $fk) && $attribute)
-        {
+if (array_key_exists($attribute, $fk) && $attribute) {
             $rel = $fk[$attribute];
-            $labelCol = $this->getNameAttributeFK($rel[Generator::REL_TABLE]);
-
-            // dp xx
-            //$humanize = Inflector::humanize($rel[Generator::REL_TABLE]);
-            $humanize = "--select--";
-
+            $labelCol = $this->getNameAttributeFK($rel[3]);
+            $humanize = Inflector::humanize($rel[3]);
             $id = 'grid-' . Inflector::camel2id(StringHelper::basename($this->searchModelClass)) . '-' . $attribute;
 //            $modelRel = $rel[2] ? lcfirst(Inflector::pluralize($rel[1])) : lcfirst($rel[1]);
            if ($column->allowNull)
-           {
-                $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_FOREIGN_KEY]);
-                $humanize = Inflector::humanize($finalName);
-
-                if ($this->generateSearchModel && isset($this->webUserColName)) {
-                    $webUserColNameText = "andWhere(['" . $this->webUserColName . "'=>Yii::\$app->user->id])->";
-                }
-                else {
-                    $webUserColNameText = null;
-                }
-
-            $output = "[
+           { $output = "[
                 'attribute' => '$attribute',
-                'label' => '$humanize',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
                 'value' => function(\$model){
                     if (\$model->$rel[7])
                     {return \$model->$rel[7]->$labelCol;}
@@ -864,51 +646,31 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->".$webUserColNameText."asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
+                'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => '--INPUT--', 'id' => '$id']
+                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
             ],\n";
            return $output;
            }
-           else
-           {
-                if ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)')
-                {
-                    return "\$form->field($model, '$attribute')->checkbox()";
-                }
-                else
-                {
-                        $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_FOREIGN_KEY]);
-                        $humanize = ucwords(Inflector::humanize($finalName));
-
-                if ($this->generateSearchModel && isset($this->webUserColName)) {
-                    $webUserColNameText = "andWhere(['" . $this->webUserColName . "'=>Yii::\$app->user->id])->";
-                }
-                else {
-                    $webUserColNameText = null;
-                }
-
-
-                    $output = "[
-                        'attribute' => '$attribute',
-                        'label' => '$humanize',
-                        'value' => function(\$model){
-                            return isset(\$model->$rel[7]) ? \$model->$rel[7]->$labelCol : null;
-                        },
-                        'filterType' => GridView::FILTER_SELECT2,
-                        'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->".$webUserColNameText."asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
-                        'filterWidgetOptions' => [
-                            'pluginOptions' => ['allowClear' => true],
-                        ],
-                        'filterInputOptions' => ['placeholder' => '--INPUT--', 'id' => '$id']
-                    ],\n";
-                }
-               return $output;
+           else 
+           { $output = "[
+                'attribute' => '$attribute',
+                'label' => " . $this->generateString(ucwords(Inflector::humanize($rel[5]))) . ",
+                'value' => function(\$model){                   
+                    return \$model->$rel[7]->$labelCol;                   
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => '$humanize', 'id' => '$id']
+            ],\n";
+           return $output;                          
            }
         } else {
-            // this is the header
             return "'$attribute" . ($format === 'text' ? "" : ":" . $format) . "',\n";
         }
     }
@@ -926,11 +688,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (in_array($attribute, $this->hiddenColumns)) {
             return "\"$attribute\" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]]"; //fixes #91 https://github.com/mootensai/yii2-enhanced-gii/issues/91
         }
-
-        $column = $tableSchema->columns[$attribute];
-        $finalName = str_replace($this->fieldNameStrip, '', $column->name);
-        $humanize = ucwords(Inflector::humanize($finalName));
-
+        $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_PASSWORD]";
@@ -938,18 +696,15 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\"$attribute\" => ['type' => TabularForm::INPUT_TEXT]";
             }
         }
+        $column = $tableSchema->columns[$attribute];
         if ($column->autoIncrement) {
             return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN]";
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
-            return "'$attribute' =>
-            //['type' => TabularForm::INPUT_CHECKBOX,
-            //'options' => [
-            //    'style' => 'position : relative; margin-top : -9px'
-            //]
-            [
-                'type'=>TabularForm::INPUT_WIDGET,
-                'widgetClass'=>\kartik\widgets\SwitchInput::classname(),
-            ]";
+            return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
+            'options' => [
+                'style' => 'position : relative; margin-top : -9px'
+            ]
+        ]";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
             return "'$attribute' => ['type' => TabularForm::INPUT_TEXTAREA]";
         } elseif ($column->dbType === 'date') {
@@ -961,9 +716,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        // dp
-                        // 'placeholder' => " . $this->generateString('' . $humanize) . ",
-                        'placeholder' => '--INPUT--',
+                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true
                     ]
                 ],
@@ -978,9 +731,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        // dp
-                        // 'placeholder' => " . $this->generateString('' . $humanize) . ",
-                        'placeholder' => '--INPUT--',
+                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true
                     ]
                 ]
@@ -995,9 +746,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 'ajaxConversion' => true,
                 'options' => [
                     'pluginOptions' => [
-                        // dp
-                        // 'placeholder' => " . $this->generateString('' . $humanize) . ",
-                        'placeholder' => '--INPUT--',
+                        'placeholder' => " . $this->generateString('Choose ' . $humanize) . ",
                         'autoclose' => true,
                     ]
                 ],
@@ -1006,52 +755,21 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         } elseif (array_key_exists($column->name, $fk)) {
             $rel = $fk[$column->name];
             $labelCol = $this->getNameAttributeFK($rel[self::REL_TABLE]);
-
-            // xx - dp this is for our lablels on foreign key fields
-
+            $humanize = Inflector::humanize($rel[self::REL_TABLE]);
 //            $pk = empty($this->tableSchema->primaryKey) ? $this->tableSchema->getColumnNames()[0] : $this->tableSchema->primaryKey[0];
             $fkClassFQ = "\\" . $this->nsModel . "\\" . $rel[self::REL_CLASS];
-
-            // xx - if the webUserColName is not specified on command-line, or if it doesn't exist for this model (may not be relevant)
-            // then just return everything
-            $fkClass = $rel[1];
-            $fkTableName = $rel[Generator::REL_TABLE];
-            $db = $this->getDbConnection();
-            $fkTableSchema = $db->getTableSchema($fkTableName);
-            $hasWebUserColColumn = array_key_exists($this->webUserColName, $fkTableSchema->columns);
-
-            if (! isset($this->webUserColName) || ! $hasWebUserColColumn) {
-                $webUserColNameText = "";
-            }
-            else {
-                $webUserColNameText = "andWhere(['" . $this->webUserColName . "'=>Yii::\$app->user->id])->";
-            }
-
-            $tweakFilter = null;
-            if (array_key_exists($fkClass, $this->tweakRules)) {
-                $classRule = $this->tweakRules[$fkClass];
-                if (array_key_exists($attribute, $classRule)) {
-                    $tweakFilter = $classRule[$attribute][0] . '->';
-                }
-            }
-            else {
-                $tweakFilter = "orderBy('$labelCol')->";
-            }
-
             $output = "'$attribute' => [
-                'label' => '$humanize',
-                'type' => TabularForm::INPUT_WIDGET,
-                'widgetClass' => \\kartik\\widgets\\Select2::className(),
-                'options' => [
-                    'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->" . $webUserColNameText . $tweakFilter ."asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
-                    'options' => ['placeholder' => '--INPUT--'],
-                ],
-                'columnOptions' => ['width' => '200px']
-            ]";
+            'label' => '$humanize',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \\kartik\\widgets\\Select2::className(),
+            'options' => [
+                'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$labelCol')->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
+                'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ]";
             return $output;
-        }
-
-        else {
+        } else {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
                 $input = 'INPUT_PASSWORD';
             } else {
@@ -1066,9 +784,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'items' => " . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ",
                     'options' => [
                         'columnOptions' => ['width' => '185px'],
-                        // dp
-                        // 'options' => ['placeholder' => " . $this->generateString('' . $humanize) . "],
-                        'options' => ['placeholder' => '--INPUT--'],
+                        'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
                     ]
         ]";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
@@ -1100,12 +816,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (in_array($attribute, $this->hiddenColumns)) {
             return "\$form->field($model, '$attribute', ['template' => '{input}'])->textInput(['style' => 'display:none']);";
         }
-
-        $column = $tableSchema->columns[$attribute];
-        $finalName = str_replace($this->fieldNameStrip, '', $attribute);
-        $humanize = ucwords(Inflector::humanize($finalName));
-        $placeholder = $humanize;
-
+        $placeholder = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "\$form->field($model, '$attribute')->passwordInput()";
@@ -1115,9 +826,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\$form->field($model, '$attribute')";
             }
         }
+        $column = $tableSchema->columns[$attribute];
         if ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
-            //return "\$form->field($model, '$attribute')->checkbox()";
-            return "\$form->field($model, '$attribute')->widget(\\kartik\\widgets\\SwitchInput::className(), [])";
+            return "\$form->field($model, '$attribute')->checkbox()";
         } elseif ($column->type === 'text' || $column->dbType === 'tinytext') {
             return "\$form->field($model, '$attribute')->textarea(['rows' => 6])";
         } elseif ($column->dbType === 'date') {
@@ -1126,122 +837,49 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         'saveFormat' => 'php:Y-m-d',
         'ajaxConversion' => true,
         'options' => [
-            'id' => 'field_$attribute',
             'pluginOptions' => [
-                'placeholder' => '--INPUT--',
+                'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true
             ]
         ],
     ]);";
         } elseif ($column->dbType === 'time') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::className(), [
-                'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
-                'saveFormat' => 'php:H:i:s',
-                'ajaxConversion' => true,
-                'options' => [
-                    'id' => 'field_$attribute',
-                    'pluginOptions' => [
-                        'placeholder' => '--INPUT--',
-                        'autoclose' => true
-                    ]
-                ]
-            ]);";
+        'type' => \\kartik\\datecontrol\\DateControl::FORMAT_TIME,
+        'saveFormat' => 'php:H:i:s',
+        'ajaxConversion' => true,
+        'options' => [
+            'pluginOptions' => [
+                'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
+                'autoclose' => true
+            ]
+        ]
+    ]);";
         } elseif ($column->dbType === 'datetime') {
             return "\$form->field($model, '$attribute')->widget(\\kartik\\datecontrol\\DateControl::classname(), [
         'type' => \\kartik\\datecontrol\\DateControl::FORMAT_DATETIME,
         'saveFormat' => 'php:Y-m-d H:i:s',
         'ajaxConversion' => true,
         'options' => [
-            'id' => 'field_$attribute',
             'pluginOptions' => [
-                'placeholder' => '--INPUT--',
+                'placeholder' => " . $this->generateString('Choose ' . $placeholder) . ",
                 'autoclose' => true,
             ]
         ],
     ]);";
         } elseif (array_key_exists($column->name, $fk)) {
             $rel = $fk[$column->name];
-
-            $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_TABLE]);
-            $humanize = ucwords(Inflector::humanize($finalName));
-
-            $labelCol = $this->getNameAttributeFK($rel[Generator::REL_TABLE]);
-            $finalName = str_replace($this->fieldNameStrip, '', $rel[Generator::REL_TABLE]);
-            $humanize = ucwords(Inflector::humanize($finalName));
-
+            $labelCol = $this->getNameAttributeFK($rel[3]);
+            $humanize = Inflector::humanize($rel[3]);
 //            $pk = empty($this->tableSchema->primaryKey) ? $this->tableSchema->getColumnNames()[0] : $this->tableSchema->primaryKey[0];
             $fkClassFQ = "\\" . $this->nsModel . "\\" . $rel[1];
-
-            // xx - if the webUserColName is not specified on command-line, or if it doesn't exist for this model (may not be relevant)
-            // then just return everything
-            $fkClass = $rel[1];
-            $fkTableName = $rel[Generator::REL_TABLE];
-            $db = $this->getDbConnection();
-            $fkTableSchema = $db->getTableSchema($fkTableName);
-            $hasWebUserColColumn = array_key_exists($this->webUserColName, $fkTableSchema->columns);
-
-            if (! isset($this->webUserColName) || ! $hasWebUserColColumn) {
-                $webUserColNameText = "";
-            }
-            else {
-                $webUserColNameText = "andWhere(['" . $this->webUserColName . "'=>Yii::\$app->user->id])->";
-            }
-
-            $tweakFilter = null;
-            if (array_key_exists($fkClass, $this->tweakRules)) {
-                $classRule = $this->tweakRules[$fkClass];
-                if (array_key_exists($attribute, $classRule)) {
-                    $tweakFilter = $classRule[$attribute][0] . '->';
-                }
-            }
-            else {
-                $tweakFilter = "orderBy('$rel[4]')->";
-            }
-
-            if (array_key_exists($attribute, $this->editFormDepFieldList)) {
-                //$parentAttrName = $this->editFormDepFieldList[$attribute][0];
-                
-                
-                $childField = $attribute;
-
-                $fromDepFieldDef = $this->editFormDepFieldList[$attribute];
-                $defExplode = explode('#', $fromDepFieldDef[0]);
-                $parentField = $defExplode[0];
-                $parentQuery = $defExplode[1];
-                
-                $childFieldFinalName = sprintf("\$%s_list", $childField);
-                $fieldParentFieldID = "field_$parentField";
-                
-                $controllerActionName = \yii\helpers\Inflector::camel2id($attribute) . "-list";
-                
-                $output = "\$form->field($model, '$attribute')->widget(\\kartik\\widgets\\DepDrop::classname(), [
-                    'data'=> $childFieldFinalName,
-                    'type' => \kartik\depdrop\DepDrop::TYPE_SELECT2,
-                    'options' => [
-                        'placeholder' => '--INPUT--',
-                        'id' => 'field_$attribute',
-                    ],
-                    'pluginOptions' => [
-                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
-                        'placeholder'=>'Select...',
-                        'depends' => [ '$fieldParentFieldID' ],
-                        'url'=>\\yii\\helpers\\Url::to(['$controllerActionName']),
-                    ],
-                ]);";
-            }
-            else {
-                $output = "\$form->field($model, '$attribute')->widget(\\kartik\\widgets\\Select2::classname(), [
-                    'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->". $webUserColNameText . $tweakFilter . "asArray()->all(), '$rel[4]', '$labelCol'),
-                    'options' => [
-                        'placeholder' => '--INPUT--',
-                        'id' => 'field_$attribute',
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ],
-                ]);";
-            }
-
+            $output = "\$form->field($model, '$attribute')->widget(\\kartik\\widgets\\Select2::classname(), [
+        'data' => \\yii\\helpers\\ArrayHelper::map($fkClassFQ::find()->orderBy('$rel[4]')->asArray()->all(), '$rel[4]', '$labelCol'),
+        'options' => ['placeholder' => " . $this->generateString('Choose ' . $humanize) . "],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);";
             return $output;
         } else {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
@@ -1257,13 +895,9 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                 return "\$form->field($model, '$attribute')->dropDownList("
                 . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ", ['prompt' => ''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
-                // dp
-                // return "\$form->field($model, '$attribute')->$input(['placeholder' => '$placeholder'])";
-                return "\$form->field($model, '$attribute')->$input(['placeholder' => '--INPUT--'])";
+                return "\$form->field($model, '$attribute')->$input(['placeholder' => '$placeholder'])";
             } else {
-                // dp
-                // return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => '$placeholder'])";
-                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => '--INPUT--'])";
+                return "\$form->field($model, '$attribute')->$input(['maxlength' => true, 'placeholder' => '$placeholder'])";
             }
         }
     }
@@ -1275,18 +909,12 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
      */
     public function generateColumnFormat($column)
     {
-        if ($column->type === 'boolean' || $column->type === 'tinyint') {
+        if ($column->phpType === 'boolean') {
             return 'boolean';
         } elseif ($column->type === 'text') {
             return 'ntext';
         } elseif (stripos($column->name, 'time') !== false && $column->phpType === 'integer') {
             return 'datetime';
-        } elseif ($column->type === 'datetime') {
-            return 'datetime';
-        } elseif ($column->type === 'date') {
-            return 'date';
-        } elseif ($column->type === 'time') {
-            return 'time';
         } elseif (stripos($column->name, 'email') !== false) {
             return 'email';
         } elseif (stripos($column->name, 'url') !== false) {

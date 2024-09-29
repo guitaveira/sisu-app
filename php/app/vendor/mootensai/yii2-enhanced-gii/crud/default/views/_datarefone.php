@@ -3,8 +3,6 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-use mootensai\enhancedgii\crud\Generator;
-
 /* @var $this yii\web\View */
 /* @var $generator mootensai\enhancedgii\crud\Generator */
 /* @var $relName array */
@@ -19,14 +17,6 @@ $fk = $generator->generateFK($tableSchema);
 echo "<?php\n";
 ?>
 
-/**
- * CREATED BY A CODE GENERATOR!!!!
- * THIS FILE WAS CREATED BY A HEAVILY MODIFIED yii2-enhanced-gii for use in GRS.
- * Hand editing this file will result in lost code.
- *
- * _datarefone.php
- */
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\grid\GridView;
@@ -39,8 +29,8 @@ use kartik\grid\GridView;
 <div>
 
     <div class="row">
-        <div class="col-lg-9">
-            <h3><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttributeFK($relations[$generator::REL_TABLE]) ?>) ?></h3>
+        <div class="col-sm-9">
+            <h2><?= "<?= " ?>Html::encode($model-><?= $generator->getNameAttributeFK($relations[$generator::REL_TABLE]) ?>) ?></h2>
         </div>
     </div>
 
@@ -74,12 +64,12 @@ use kartik\grid\GridView;
 <?= "<?php else: ?>\n" ?>
 <div class="<?= Inflector::camel2id($relations[$generator::REL_CLASS]) ?>-view">
     <div class="row">
-        <div class="col-lg-9">
-            <h3><?= $relations[$generator::REL_CLASS] ?></h3>
+        <div class="col-sm-9">
+            <h2><?= $relations[$generator::REL_CLASS] ?></h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12"><?= $relations[$generator::REL_CLASS] ?> not set.</div>
+        <div class="col-sm-12"><?= $relations[$generator::REL_CLASS] ?> not set.</div>
     </div>
 </div>
 <?= "<?php endif; ?>\n" ?>

@@ -3,8 +3,6 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-use mootensai\enhancedgii\crud\Generator;
-
 /* @var $this yii\web\View */
 /* @var $generator \mootensai\enhancedgii\crud\Generator */
 /* @var $relations array */
@@ -15,14 +13,6 @@ $tableSchema = $generator->getDbConnection()->getTableSchema($relations[$generat
 $fk = $generator->generateFK($tableSchema);
 echo "<?php\n";
 ?>
-
-/**
- * CREATED BY A CODE GENERATOR!!!!
- * THIS FILE WAS CREATED BY A HEAVILY MODIFIED yii2-enhanced-gii for use in GRS.
- * Hand editing this file will result in lost code.
- *
- * _formrefone.php
- */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

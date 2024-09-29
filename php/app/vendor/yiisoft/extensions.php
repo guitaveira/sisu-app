@@ -336,6 +336,15 @@ return array (
       '@kartik/builder' => $vendorDir . '/kartik-v/yii2-builder/src',
     ),
   ),
+  'kartik-v/yii2-export' => 
+  array (
+    'name' => 'kartik-v/yii2-export',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/export' => $vendorDir . '/kartik-v/yii2-export/src',
+    ),
+  ),
   'mootensai/yii2-enhanced-gii' => 
   array (
     'name' => 'mootensai/yii2-enhanced-gii',
@@ -345,14 +354,5 @@ return array (
       '@mootensai/enhancedgii' => $vendorDir . '/mootensai/yii2-enhanced-gii',
     ),
     'bootstrap' => 'mootensai\\enhancedgii\\Bootstrap',
-  ),
-  'kartik-v/yii2-export' => 
-  array (
-    'name' => 'kartik-v/yii2-export',
-    'version' => 'dev-master',
-    'alias' => 
-    array (
-      '@kartik/export' => $vendorDir . '/kartik-v/yii2-export/src',
-    ),
   ),
 );
