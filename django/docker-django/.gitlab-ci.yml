@@ -19,7 +19,7 @@ test:
     - apk add --no-cache docker-compose
   script:
     # Executa o docker-compose para rodar os testes
-    - docker-compose up -f django/docker-django/docker-compose.yml --build -d  # Sobe os containers em background
+    - docker-compose -f django/docker-django/docker-compose.yml up --build -d  # Sobe os containers em background
     - docker-compose exec web python manage.py test  # Executa os testes dentro do container Django
     - docker-compose down  # Derruba os containers após os testes
   #only:  #O correto é somente nos merge request executar os testes.
