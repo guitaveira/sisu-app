@@ -1,0 +1,9 @@
+stages: []
+
+include:
+  - local: 'django/docker-django/.gitlab-ci.yml'
+    rules:
+      - if: '$CI_COMMIT_REF_NAME == "main"'  # Main é django 
+  - local: 'php/app/.gitlab-ci.yml'
+    rules:
+      - if: '$CI_COMMIT_REF_NAME == "2022"'  # Se for feito o push no branch 2022 o buil será do Yii.

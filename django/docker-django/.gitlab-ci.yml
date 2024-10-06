@@ -1,0 +1,41 @@
+stages:
+  - test
+  - build
+
+# Variáveis
+variables:
+  IMAGE_NAME: "$CI_REGISTRY_IMAGE/django-app"
+  DOCKER_HOST: tcp://docker:2375/  # Permite que o docker-compose acesse o daemon do Docker
+  DOCKER_DRIVER: overlay2  # Sistema de armazenamento usado pelo Docker
+
+# Testes automatizados usando Docker Compose
+test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:dind  # Docker in Docker para que o compose possa acessar o Docker
+  before_script:
+    # Certifique-se de que você tem o docker-compose instalado
+    - apk add --no-cache docker-compose
+  script:
+    # Executa o docker-compose para rodar os testes
+    - docker-compose up --build -d  # Sobe os containers em background
+    - docker-compose exec web python manage.py test  # Executa os testes dentro do container Django
+    - docker-compose down  # Derruba os containers após os testes
+  #only:  #O correto é somente nos merge request executar os testes.
+    #- merge_requests  # Executa os testes nos MRs
+
+# Build e Push da imagem Docker para o registro
+build:
+  stage: build
+  image: docker:latest  # Usa a imagem do Docker para construir e enviar a imagem da aplicação
+  services:
+    - docker:dind  # Docker dentro de Docker para build e push da imagem
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker build -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" .
+    - docker push "$IMAGE_NAME:$CI_COMMIT_REF_NAME"
+  only:
+    - master  # Executa o build e push apenas no branch master
+  dependencies:
+    - test  # Só faz build se os testes passarem
