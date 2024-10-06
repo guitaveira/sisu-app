@@ -1,33 +1,36 @@
 version: "3"
 
 volumes:
-  local_postgres_data: {}
-  local_postgres_data_backups: {}
+  local_postgres_data: 
+  local_postgres_data_backups:
+  media:
+  static:
+  nginx:
+  initdb:
 
 services:
   nginx:
     image: nginx:alpine
     container_name: nz01
     ports:
-      - "8000:80"
-      - "5443:443"
+      - "80:8000"
     volumes:
-      - ./src:/src
-      - ./config/nginx:/etc/nginx/conf.d
-      - ./ssl:/etc/nginx/ssl
+      - media:/src/media
+      - static:/src/static
+      - nginx:/etc/nginx/conf.d
     depends_on:
       - web
     networks:
       - djangonetwork
   web:
-    build:
-      context: .
-      dockerfile: compose/django/Dockerfile
+    image: 8a5d02a1685ccdcf34d68b656988fe5bef463caef81f06db5835200841569edf
     container_name: dz01
     depends_on:
       - db
     volumes:
-      - ./src:/src
+      - media:/src/media
+      - static:/src/static
+      - nginx:/config/nginx
     expose:
       - "8000"
     links:
@@ -36,18 +39,15 @@ services:
       - ./.envs/.django
     networks:
       - djangonetwork
-    command: sh -c "python manage.py collectstatic --no-input; python manage.py migrate; gunicorn --reload mydjango.wsgi -b 0.0.0.0:8000 & celery --app myapp.tasks worker --loglevel=INFO"
   db:
-    build:
-      context: .
-      dockerfile: compose/postgres/Dockerfile
+    image: 680dd4a6f526721a0437e2ffdcf6ddb4de0b86bd57307534ee3a6b37cf4d78de
     container_name: pz01
     env_file:
       - ./.envs/.postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
-      - ./initdb:/docker-entrypoint-initdb.d
+      - initdb:/docker-entrypoint-initdb.d
     networks:
       - djangonetwork
   redis:

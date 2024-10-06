@@ -13,4 +13,4 @@ vine==5.0.0
 importlib-metadata==4.13.0
 dnspython==2.3
 djangorestframework==3.14
-djangorestframework_simplejwt == 5.3.1
+djangorestframework_simplejwt == 5.3.0

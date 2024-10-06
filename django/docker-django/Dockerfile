@@ -13,6 +13,12 @@ RUN mkdir /static
 # Creating Work Directory
 WORKDIR /src
 
+#copy app files
+
+COPY ./src /src
+COPY ./config /config
+
+
 # Adding mandatory packages to docker
 RUN apk update && apk add --no-cache \
     postgresql \
@@ -43,8 +49,8 @@ RUN pip install --upgrade pip
 # RUN pip3 install --no-cache-dir --disable-pip-version-check scipy==1.3.1
 
 # Installing requirements.pip from project
-COPY ./src/requirements.pip /scripts/
-RUN pip install --no-cache-dir -r /scripts/requirements.pip
+
+RUN pip install --no-cache-dir -r requirements.pip
 
 # *install psycopg2 if you don't have it requirements.pip*
 # RUN pip install --no-cache-dir psycopg2
