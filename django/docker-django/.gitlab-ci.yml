@@ -20,6 +20,15 @@ test:
   script:
     # Executa o docker-compose para rodar os testes
     - docker-compose -f django/docker-django/docker-compose.yml up --build -d  # Sobe os containers em background
+    - |
+      for i in {30..0}; do
+        if docker-compose -f django/docker-django/docker-compose.yml exec db pg_isready; then
+          echo "PostgreSQL is ready!"
+          break
+        fi
+        echo "PostgreSQL is unavailable - sleeping"
+        sleep 1
+      done
     - docker-compose -f django/docker-django/docker-compose.yml exec web python manage.py test  # Executa os testes dentro do container Django
     - docker-compose down  # Derruba os containers após os testes
   #only:  #O correto é somente nos merge request executar os testes.
