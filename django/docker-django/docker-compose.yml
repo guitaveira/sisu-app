@@ -10,7 +10,7 @@ services:
     container_name: nz01
     ports:
       - "8000:80"
-      - "5443:443"
+      - "443:443"
     volumes:
       - ./src:/src
       - ./config/nginx:/etc/nginx/conf.d
