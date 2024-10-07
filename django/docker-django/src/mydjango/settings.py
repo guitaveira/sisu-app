@@ -151,12 +151,27 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 STATIC_ROOT = './static/'
 MEDIA_ROOT = './media/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtpi.kinghost.net'  # Servidor de SMTP
+EMAIL_PORT = 587  # Porta do servidor SMTP
+EMAIL_USE_TLS = True  # SSL ou TLS
+EMAIL_HOST_USER = 'naoresponda@computacaoifg.com.br'  # Seu e-mail de envio
+EMAIL_HOST_PASSWORD = os.getenv('SMTPPWD')  # Senha do e-mail
+DEFAULT_FROM_EMAIL = 'naoresponda@computacaoifg.com.br'  # O e-mail padrão de onde vem o envio
+SERVER_EMAIL = DEFAULT_FROM_EMAIL #palhaçada do Django.request usa SERVER_EMAIL
+ADMINS = [('Admin', 'mestre.alessandros@gmail.com'),
+          ('Gitlab', 'incoming+phdcoder-programacao-web-34926235-7jX7EFtsvnsSzC7n3Eoy-issue@incoming.gitlab.com')]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',  # Handler que envia e-mails
         },
     },
     'loggers': {
@@ -167,6 +182,11 @@ LOGGING = {
         'celery': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        'django.request': {
+            'handlers': ['mail_admins','console'],
+            'level': 'ERROR',
+            'propagate': True,
         },
     },
 }

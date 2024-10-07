@@ -36,7 +36,8 @@ class FeedBackTestCase(TestCase):
             "nome" : "teste",
             "email" :"teste@"+fakedomain,
             "feedback": "Nada a delarar",
-            "_save" : "Save"
+            "_save" : "Save",
+            "user" : "1"
         })
         self.assertEqual(response.status_code,200)
         query= Feedback.objects.filter(nome="teste",email="teste@"+fakedomain,
