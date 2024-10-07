@@ -20,7 +20,7 @@ test:
   script:
     # Executa o docker-compose para rodar os testes
     - docker-compose -f django/docker-django/docker-compose.yml up --build -d  # Sobe os containers em background
-    - docker-compose exec web python manage.py test  # Executa os testes dentro do container Django
+    - docker-compose -f django/docker-django/docker-compose.yml exec web python manage.py test  # Executa os testes dentro do container Django
     - docker-compose down  # Derruba os containers após os testes
   #only:  #O correto é somente nos merge request executar os testes.
     #- merge_requests  # Executa os testes nos MRs
@@ -33,7 +33,7 @@ build:
     - docker:dind  # Docker dentro de Docker para build e push da imagem
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker build -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" .
+    - docker build -f django/docker-django/Dockerfile -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" .
     - docker push "$IMAGE_NAME:$CI_COMMIT_REF_NAME"
   only:
     - master  # Executa o build e push apenas no branch master
