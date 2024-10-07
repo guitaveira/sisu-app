@@ -45,6 +45,6 @@ build:
     - docker build -f django/docker-django/Dockerfile -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" .
     - docker push "$IMAGE_NAME:$CI_COMMIT_REF_NAME"
   only:
-    - master  # Executa o build e push apenas no branch master
+    - main  # Executa o build e push apenas no branch master
   dependencies:
     - test  # Só faz build se os testes passarem
