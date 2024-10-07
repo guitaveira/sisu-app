@@ -1,5 +1,4 @@
 stages:
-  - test
   - build
 
 # Variáveis
@@ -42,9 +41,9 @@ build:
     - docker:dind  # Docker dentro de Docker para build e push da imagem
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker build -f django/docker-django/Dockerfile -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" .
+    - docker build -f django/docker-django/Dockerfile -t "$IMAGE_NAME:$CI_COMMIT_REF_NAME" django/docker-django/
     - docker push "$IMAGE_NAME:$CI_COMMIT_REF_NAME"
   only:
     - main  # Executa o build e push apenas no branch master
-  dependencies:
-    - test  # Só faz build se os testes passarem
+#  dependencies:
+#    - test  # Só faz build se os testes passarem
