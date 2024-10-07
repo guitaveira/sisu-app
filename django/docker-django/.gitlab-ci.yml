@@ -30,7 +30,7 @@ test:
         sleep 1
       done
     - docker-compose -f django/docker-django/docker-compose.yml exec web python manage.py test  # Executa os testes dentro do container Django
-    - docker-compose down  # Derruba os containers após os testes
+    - docker-compose -f django/docker-django/docker-compose.yml down  # Derruba os containers após os testes
   #only:  #O correto é somente nos merge request executar os testes.
     #- merge_requests  # Executa os testes nos MRs
 
