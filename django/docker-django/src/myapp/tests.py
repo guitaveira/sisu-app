@@ -20,9 +20,11 @@ class FeedBackTestCase(TestCase):
             "nome" : "teste",
             "email" :"teste@gmail.com",
             "feedback": "Nada a delarar",
-            "_save" : "Save"
+            "_save" : "Save",
+            "user" : "1"
             }
         )
+        #print(response.content.decode())
         self.assertEqual(response.status_code,302)
         query= Feedback.objects.filter(nome="teste",email="teste@gmail.com",feedback="Nada a delarar")
         self.assertEqual(query.count(),1)

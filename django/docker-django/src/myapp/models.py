@@ -13,6 +13,8 @@ def checkDns(email):
         raise ValidationError(f'O domínio {domain} não possui registros MX válidos.')
     except dns.resolver.LifetimeTimeout:
         raise ValidationError("Não foi possível contactar ao DNS")
+    except Exception as e:  # Captura qualquer outra exceção
+        raise ValidationError(f"Ocorreu um erro ao validar o domínio {domain}")
 
 class Feedback(models.Model):
     nome = models.TextField(blank=True, null=True)
