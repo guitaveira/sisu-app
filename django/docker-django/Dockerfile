@@ -6,18 +6,15 @@ FROM python:3.7-alpine
 ENV PYTHONUNBUFFERED 1
 ENV C_FORCE_ROOT true
 
-# Making source and static directory
-RUN mkdir /src
-RUN mkdir /static
-
-# Creating Work Directory
-WORKDIR /src
-
 #copy app files
 
 COPY ./src /src
 COPY ./config /config
 
+WORKDIR /src
+
+RUN mkdir -p /src/static
+RUN mkdir -p /src/media
 
 # Adding mandatory packages to docker
 RUN apk update && apk add --no-cache \
