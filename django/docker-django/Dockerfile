@@ -30,7 +30,7 @@ RUN apk update && apk add --no-cache \
 
 # Installing temporary packages required for installing requirements.pip 
 RUN apk add --no-cache --virtual build-deps \
-    gcc \  
+    gcc \
     python3-dev \
     musl-dev \
     postgresql-dev\
@@ -61,6 +61,7 @@ RUN apk del build-deps && \
     rm -rf ~/.cache/pip
 
 RUN addgroup --system django && adduser --system django --ingroup django
+RUN chown -R django:django /src/static /src/media
 # COPY --from=base /opt/venv /opt/venv
 # ENV PATH="/opt/venv/bin:$PATH"
 USER django
