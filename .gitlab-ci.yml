@@ -1,4 +1,0 @@
-include:
-  - 'django/docker-django/.gitlab-ci.yml'
-before_script:
-  - cd django/docker-django
