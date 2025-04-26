@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<PKPUsers xmlns="http://pkp.sfu.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://pkp.sfu.ca pkp-users.xsd">
+  <user_groups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://pkp.sfu.ca pkp-users.xsd">
+    <user_group><role_id>1048576</role_id><context_id>1</context_id><is_default>true</is_default><show_title>false</show_title><permit_self_registration>true</permit_self_registration><permit_metadata_edit>false</permit_metadata_edit><name locale="en_US">Reader</name><name locale="pt_BR">Leitor</name><abbrev locale="en_US">Read</abbrev><abbrev locale="pt_BR">LE</abbrev><stage_assignments/></user_group>
+  </user_groups>
+ <users>
+  <user>
+   <givenname locale="en_US">Adriano Braga                              </givenname>
+   <email>contato@adrianobraga.com.br</email>
+   <username>contato_t</username>
+   <password must_change="true">
+    <value>237319</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Alan Keller Gomes                        </givenname>
+   <email>alan.gomes@ifg.edu.br</email>
+   <username>alan.gomes_t</username>
+   <password must_change="true">
+    <value>237320</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Bruno Silvestre                     </givenname>
+   <email>brunoos@inf.ufg.br</email>
+   <username>brunoos_t</username>
+   <password must_change="true">
+    <value>237326</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Cleon Xavier                               </givenname>
+   <email>cleon.junior@ifgoiano.edu.br</email>
+   <username>cleon.junior_t</username>
+   <password must_change="true">
+    <value>237328</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Daniel Stefany Duarte Caetano                        </givenname>
+   <email>daniel.caetano@ufu.br</email>
+   <username>daniel.caetano_t</username>
+   <password must_change="true">
+    <value>237329</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Edmar Yokome                         </givenname>
+   <email>edmar.yokome@gmail.com</email>
+   <username>edmar.yokome_t</username>
+   <password must_change="true">
+    <value>237330</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Fabian Cardoso                      </givenname>
+   <email>fabian@unirv.edu.br</email>
+   <username>fabian_t</username>
+   <password must_change="true">
+    <value>237332</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Fabio Costa                 </givenname>
+   <email>fmc@inf.ufg.br</email>
+   <username>fmc_t</username>
+   <password must_change="true">
+    <value>237333</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Gilmar Arantes                    </givenname>
+   <email>gilmar@inf.ufg.br</email>
+   <username>gilmar_t</username>
+   <password must_change="true">
+    <value>237337</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Heitor Costa                 </givenname>
+   <email>heitor@ufla.br</email>
+   <username>heitor_t</username>
+   <password must_change="true">
+    <value>237338</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Liana Duenha                        </givenname>
+   <email>lianaduenha@gmail.com</email>
+   <username>lianaduenha_t</username>
+   <password must_change="true">
+    <value>237341</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Luanna Lopes Lobato                      </givenname>
+   <email>luanna@ufcat.edu.br</email>
+   <username>luanna_t</username>
+   <password must_change="true">
+    <value>237343</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Luiz Henrique Rauber Rodrigues                    </givenname>
+   <email>luizhrr@gmail.com</email>
+   <username>luizhrr_t</username>
+   <password must_change="true">
+    <value>237344</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Luiz Mario Pascoal                                </givenname>
+   <email>luizpascoal.senai@fieg.com.br</email>
+   <username>luizpascoal.senai_t</username>
+   <password must_change="true">
+    <value>237345</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Marcio Duarte                          </givenname>
+   <email>marcioaduarte@gmail.com</email>
+   <username>marcioaduarte_t</username>
+   <password must_change="true">
+    <value>237346</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Marcos Alves Vieira                      </givenname>
+   <email>marconian@gmail.com</email>
+   <username>marconian_t</username>
+   <password must_change="true">
+    <value>237347</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Marcos De Sousa                      </givenname>
+   <email>mas@pucgoias.edu.br</email>
+   <username>mas_t</username>
+   <password must_change="true">
+    <value>237348</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Renato Bulc?o-Neto                              </givenname>
+   <email>renato.bulcao.inf@gmail.com</email>
+   <username>renato.bulcao.inf_t</username>
+   <password must_change="true">
+    <value>237349</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Ricardo da Rocha                     </givenname>
+   <email>rcarocha@gmail.com</email>
+   <username>rcarocha_t</username>
+   <password must_change="true">
+    <value>237350</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Rodrigo Candido Borges                        </givenname>
+   <email>rodrigocand@gmail.com</email>
+   <username>rodrigocand_t</username>
+   <password must_change="true">
+    <value>237352</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Rubens Pereira                       </givenname>
+   <email>rubens.castro@ufg.br</email>
+   <username>rubens.castro_t</username>
+   <password must_change="true">
+    <value>237353</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Thiago Bittar                        </givenname>
+   <email>thiagojabur@gmail.com</email>
+   <username>thiagojabur_t</username>
+   <password must_change="true">
+    <value>237355</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Vinicius Cunha M Borges                      </givenname>
+   <email>vinicius@inf.ufg.br</email>
+   <username>vinicius_t</username>
+   <password must_change="true">
+    <value>237358</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Vinicius Fulber-Garcia                          </givenname>
+   <email>vfulbergarcia@gmail.com</email>
+   <username>vfulbergarcia_t</username>
+   <password must_change="true">
+    <value>237359</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">Wellington Martins                        </givenname>
+   <email>wellington@inf.ufg.br</email>
+   <username>wellington_t</username>
+   <password must_change="true">
+    <value>237360</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+  <user>
+   <givenname locale="en_US">William Ferreira                     </givenname>
+   <email>william@inf.ufg.br</email>
+   <username>william</username>
+   <password must_change="true">
+    <value>237361</value>
+   </password>
+   <date_registered>2024-12-06 00:09:57</date_registered>
+   <date_last_login>2024-12-06 00:09:57</date_last_login>
+   <inline_help>true</inline_help>
+<user_group_ref>Leitor</user_group_ref>
+  </user>
+ </users>
+</PKPUsers>

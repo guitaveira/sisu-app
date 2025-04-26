@@ -25,7 +25,7 @@ services:
     networks:
       - djangonetwork
   web:
-    image: registry.gitlab.com/phdcoder/programacao-web/django-app
+    image: registry.gitlab.com/phdcoder/programacao-web/django-app:main
     container_name: dz01
     depends_on:
       - db
@@ -42,7 +42,7 @@ services:
     networks:
       - djangonetwork
   db:
-    image: registry.gitlab.com/phdcoder/programacao-web/postgres-app
+    image: registry.gitlab.com/phdcoder/programacao-web/postgres-app:main
     container_name: pz01
     env_file:
       - ./.envs/.postgres
