@@ -1,7 +1,7 @@
 from wsgiref import simple_server
 
 def app(environ, start_response):
-    data = b"Hello Web!\n"
+    data = b"Hello now Web!\n"
     start_response ("200 OK",[
         ("Content-Type", "text/plain"),
         ("Content-Length",str(len(data)))
