@@ -1,0 +1,12 @@
+FROM python:3.8-alphine
+
+RUN  apk add --update \
+     rust cargo build-base libffi-dev openssl-dev  xmlsec xmlsec-dev  &&  rm -rf /var/cache/apk/*
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
+
+COPY app /app
+
+EXPOSE 8000
+CMD  ["python" , "/app/index.py"]
