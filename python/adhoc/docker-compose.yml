@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "1080:80"
+  app:
+    build: .
+    volumes:
+      - ./app:/app
+    working_dir: /app
