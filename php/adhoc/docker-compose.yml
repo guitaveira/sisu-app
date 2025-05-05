@@ -1,6 +1,23 @@
 version: "3.9"
+volumes:
+  base_feedback_2025:
+    external: true
 
 services:
+  db:
+    image: phdcoder/postgresbr
+    restart: always
+    volumes:
+      - base_feedback_2025:/var/lib/postgresql/data/pgdata
+      - ./initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: $USER
+      POSTGRES_DB: $DB
+      POSTGRES_PASSWORD: $PASS
+      PGDATA: /var/lib/postgresql/data/pgdata
+      LANG: pt_BR.utf8
+    ports:
+      - "5439:5432"
   nginx:
     build:
       context: ./nginx
@@ -12,8 +29,13 @@ services:
   app:
     depends_on:
       - nginx
+      - db
     build: .
     restart: always
     volumes:
       - ./app:/app
+    environment:
+      USER: $USER
+      DB: $DB
+      PASSWORD: $PASS
     #Nao publique porta

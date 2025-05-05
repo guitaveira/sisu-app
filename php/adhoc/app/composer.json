@@ -1,6 +1,9 @@
 {
     "name": "ifg/pweb",
     "description": "Web Programing",
+    "config": {
+        "vendor-dir": "/app/vendor"
+    },
     "require": {
         "php": ">=8.2.0"
     }
