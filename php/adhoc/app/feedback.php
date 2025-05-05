@@ -1,3 +1,9 @@
+<?php
+/** @var string $name */
+/** @var string $email */
+/** @var string $feedback */
+/** @var string $error */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,24 +15,28 @@
 </head>
 <body>
 <div class="container">
-    <h1>Formulário Feedback</h1>
+    <h1>Formulário novo de Feedback</h1>
     <form action="/app/feedback" method="post" >
+        <p class="text-danger"> <?=$error?></p>
         <div class="form-group">
             <label>
                 Nome
-                <input type="text" class="form-control" name="name"  placeholder="Digite seu nome" >
+                <input type="text" class="form-control" name="name"
+                placeholder="Digite seu nome" value= "<?=$name ?>">
             </label>
         </div>
         <div class="form-group">
             <label>
                 Email
-                <input type="text" class="form-control" name="email" placeholder="Digite seu email" >
+                <input type="text" class="form-control" name="email" placeholder="Digite seu email"
+                 value= "<?=$email?>" >
             </label>
         </div>
         <div class="form-group">
             <label>
                 Feedback
-                <input type="text"  class="form-control" name="feedback"  placeholder="Digite seu feedback">
+                <input type="text"  class="form-control" name="feedback"  placeholder="Digite seu feedback"
+                value= "<?=$feedback?>">
             </label>
         </div>
         <input type="submit" value="Enviar" class="btn btn-primary" >
