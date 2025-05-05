@@ -9,7 +9,7 @@ function app() {
     $feedback ="";
     $error= "";
     if ($path == "/app") {
-        $data = "Hello World on php!";
+        echo  "Hello World on php!";
     } else {
         if ($path == "/app/feedback") {
             if ($method == "POST") {
@@ -17,7 +17,20 @@ function app() {
                 $email = $_POST['email'];
                 $feedback = $_POST['feedback'];
                 if (strpos($email,"@")) {
-                    $data = "$name $email $feedback";
+                    $dbname= trim(getenv("DB_DATABSE"));
+                    $username = trim(getenv("DB_USER"));
+                    $password = trim(getenv("DB_PASSWORD"));
+                    $dsn= "pgsql:host=db;dbname=$dbname;port=5432";
+                    $conexao = new \PDO($dsn, $username, $password);
+                    $sql = "INSERT INTO feedback(nome,email,feedback)
+                                 VALUES (:nome, :email,:feedback)";
+                    $stmt = $conexao->prepare($sql);
+                    $stmt->bindParam(':nome', $nome);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':feedback', $feedback);
+                    $stmt->execute();
+                    include ('view.php');
+
                 } else{
                     $error= "Email não possui arroba";
                     include ('feedback.php');
@@ -28,6 +41,5 @@ function app() {
             }
         }
     }
-    echo $data;
 }
 app();
