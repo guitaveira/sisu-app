@@ -35,7 +35,7 @@ services:
     volumes:
       - ./app:/app
     environment:
-      USER: $USER
-      DB: $DB
-      PASSWORD: $PASS
+      DB_USER: $USER
+      DB_DATABSE: $DB
+      DB_PASSWORD: $PASS
     #Nao publique porta
