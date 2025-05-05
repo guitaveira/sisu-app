@@ -1,0 +1,7 @@
+{
+    "name": "ifg/pweb",
+    "description": "Web Programing",
+    "require": {
+        "php": ">=8.2.0"
+    }
+}

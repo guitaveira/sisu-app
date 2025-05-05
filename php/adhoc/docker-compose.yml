@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/static-content:/var/www/html
+    ports:
+      - "6980:80"
+  app:
+    depends_on:
+      - nginx
+    build: .
+    restart: always
+    volumes:
+      - ./app:/app
+    #Nao publique porta
