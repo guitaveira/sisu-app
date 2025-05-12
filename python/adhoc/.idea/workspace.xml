@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="">
+    <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator">
+      <change afterPath="$PROJECT_DIR$/app/views/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/feedback.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views" />
       <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app" />
     </key>
   </component>
@@ -71,11 +73,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1746640927634</updated>
-      <workItem from="1746640929862" duration="17299000" />
+      <workItem from="1746640929862" duration="21906000" />
     </task>
+    <task id="LOCAL-00001" summary="Python com orator">
+      <option name="closed" value="true" />
+      <created>1747060471416</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747060471416</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Python com orator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Python com orator" />
   </component>
 </project>
