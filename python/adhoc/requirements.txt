@@ -1,1 +1,3 @@
-gevent
+gevent==24.2.1
+psycopg2-binary
+jinja2

@@ -25,7 +25,7 @@ function app() {
                     $sql = "INSERT INTO feedback(nome,email,feedback)
                                  VALUES (:nome, :email,:feedback)";
                     $stmt = $conexao->prepare($sql);
-                    $stmt->bindParam(':nome', $nome);
+                    $stmt->bindParam(':nome', $name);
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':feedback', $feedback);
                     $stmt->execute();
