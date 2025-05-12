@@ -1,9 +1,13 @@
 import cgi
 from wsgiref import simple_server
 from jinja2 import Environment, FileSystemLoader
+from orator import DatabaseManager, Model
 import os
 import psycopg2
 
+class Feedbak(Model):
+    __table__ = 'feedback'
+    __timestamps__ = False
 
 def app(environ, start_response):
     path = environ["PATH_INFO"]
@@ -16,29 +20,15 @@ def app(environ, start_response):
     if path == "/app/feedback":
         if method == "POST":
             form = cgi.FieldStorage(fp=environ["wsgi.input"], environ=environ)
-            feedback = {
-                "name": form.getvalue("name"),
-                "email": form.getvalue("email"),
-                "feedback": form.getvalue("feedback"),
-            }
-            if "@" in feedback["email"]:
-                conn = psycopg2.connect(
-                    host="db",
-                    dbname= os.environ['DB_DATABSE'],
-                    port=5432,
-                    user=os.environ['DB_USER'],
-                    password=os.environ['DB_PASSWORD']
-                )
-                cur = conn.cursor()
-                sql = f"INSERT INTO feedback(nome, email, feedback) " \
-                      f"VALUES ('{feedback['name']}', '{feedback['email']}', '{feedback['feedback']}')"
-                cur.execute(sql)
-                conn.commit()
-                cur.close()
-                conn.close()
+            feedback = Feedbak()
+            feedback.nome= form.getvalue("name")
+            feedback.email = form.getvalue("email")
+            feedback.feedback = form.getvalue("feedback")
+            if "@" in feedback.email:
+                feedback.save()
                 data = "Dados salvos com sucesso"
             else:
-                feedback['error']='Email deve conter @'
+                feedback.error='Email deve conter @'
                 data = template.render(feedback)
         else:
             feedback = {
@@ -56,6 +46,19 @@ def app(environ, start_response):
     return [data.encode()]
 
 if __name__ == '__main__':
+    config = {
+        'pgsql': {
+            'driver': 'pgsql',
+            'host': 'db',
+            'database': os.environ['DB_DATABSE'],
+            'user': os.environ['DB_USER'],
+            'password': os.environ['DB_PASSWORD'],
+            'prefix': ''
+        }
+    }
+
+    db = DatabaseManager(config)
+    Model.set_connection_resolver(db)
     w_s = simple_server.make_server(
         host="",
         port=8000,
