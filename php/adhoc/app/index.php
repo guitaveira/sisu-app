@@ -30,11 +30,11 @@ function app() {
         if ($method == "POST") {
             $feedback->nome=$_POST['name'];
             $feedback->email=$_POST['email'];
-            $feedback->feedback= $_POST['feedback'];
+            $feedback->feedback= htmlspecialchars($_POST['feedback']);
             if (strpos($feedback->email,"@")) {
                 if ($feedback->save()) {
                     http_response_code(302);
-                    $redirect_url = '/app/feedback/view?id=' . $feedback->id;
+                    $redirect_url = "/app/feedback/view?id=$feedback->id";
                     header("Location: " . $redirect_url);
                 }
             } else {

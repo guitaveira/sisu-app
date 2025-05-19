@@ -1,38 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Adiciona o CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Feedback</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>Fedback </h1>
-        <div class="form-group">
-            <label>
-                Nome:
-                <?=$feedback->nome?>
-            </label>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Detalhes do Feedback</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><?=$feedback->nome?></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Email:<?=$feedback->nome?></h6>
+            <p class="card-text">Feedback:<?=$feedback->feedback?></p>
         </div>
-        <div class="form-group">
-            <label>
-                Email:
-                <?=$feedback->email?>
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                Feddback:
-                <?=$feedback->feedback?>
-            </label>
-        </div>
+    </div>
+
+    <a href="/app/feedback/index" class="btn btn-secondary mt-4">Voltar</a>
 </div>
 
-<!-- Adiciona o JavaScript do Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

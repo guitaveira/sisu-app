@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator">
+      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/app/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/views/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/app/views/view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +75,8 @@
       <updated>1746640927634</updated>
       <workItem from="1746640929862" duration="23669000" />
       <workItem from="1747243333593" duration="1574000" />
+      <workItem from="1747603122933" duration="3463000" />
+      <workItem from="1747659765013" duration="153000" />
     </task>
     <task id="LOCAL-00001" summary="Python com orator">
       <option name="closed" value="true" />
