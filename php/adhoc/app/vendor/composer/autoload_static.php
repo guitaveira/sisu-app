@@ -23,6 +23,10 @@ class ComposerStaticInit17a0656525507db83dd0403b2da65973
         array (
             'voku\\' => 5,
         ),
+        'a' => 
+        array (
+            'app\\' => 4,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php83\\' => 23,
@@ -61,16 +65,16 @@ class ComposerStaticInit17a0656525507db83dd0403b2da65973
         array (
             'Brick\\Math\\' => 11,
         ),
-        'A' => 
-        array (
-            'App\\' => 4,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'app\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/',
         ),
         'Symfony\\Polyfill\\Php83\\' => 
         array (
@@ -142,10 +146,6 @@ class ComposerStaticInit17a0656525507db83dd0403b2da65973
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/',
         ),
     );
 
