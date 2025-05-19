@@ -1,45 +1,57 @@
 <?php
+include_once "/vendor/autoload.php";
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+class Feedback extends Model
+{
+    protected $table = 'feedback';
+    public $timestamps = false;
+}
+$capsule= New Capsule;
+$capsule->addConnection([
+    "driver"=>"pgsql",
+    "host"=>"db",
+    "database"=>trim(getenv("DB_DATABSE")),
+    "username"=>trim(getenv("DB_USER")),
+    "password"=>trim(getenv("DB_PASSWORD"))
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
 function app() {
-    $path = $_SERVER["REQUEST_URI"];
+    $path = strtok($_SERVER["REQUEST_URI"],'?');
     $method = $_SERVER["REQUEST_METHOD"];
-    $data = "";
-    $name = "";
-    $email = "";
-    $feedback ="";
-    $error= "";
-    if ($path == "/app") {
-        echo  "Hello World on php!";
-    } else {
-        if ($path == "/app/feedback") {
-            if ($method == "POST") {
-                $name = $_POST['name'];
-                $email = $_POST['email'];
-                $feedback = $_POST['feedback'];
-                if (strpos($email,"@")) {
-                    $dbname= trim(getenv("DB_DATABSE"));
-                    $username = trim(getenv("DB_USER"));
-                    $password = trim(getenv("DB_PASSWORD"));
-                    $dsn= "pgsql:host=db;dbname=$dbname;port=5432";
-                    $conexao = new \PDO($dsn, $username, $password);
-                    $sql = "INSERT INTO feedback(nome,email,feedback)
-                                 VALUES (:nome, :email,:feedback)";
-                    $stmt = $conexao->prepare($sql);
-                    $stmt->bindParam(':nome', $name);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':feedback', $feedback);
-                    $stmt->execute();
-                    include ('view.php');
-
-                } else{
-                    $error= "Email não possui arroba";
-                    include ('feedback.php');
+    if ($path == "/app/feedback/create") {
+        $feedback= New Feedback;
+        $erro="";
+        if ($method == "POST") {
+            $feedback->nome=$_POST['name'];
+            $feedback->email=$_POST['email'];
+            $feedback->feedback= $_POST['feedback'];
+            if (strpos($feedback->email,"@")) {
+                if ($feedback->save()) {
+                    http_response_code(302);
+                    $redirect_url = '/app/feedback/view?id=' . $feedback->id;
+                    header("Location: " . $redirect_url);
                 }
-            }
-            else {
-                include ('feedback.php');
+            } else {
+                $feedback->error="Email deve conter @";
             }
         }
+        include ('views/create.php');
+    }elseif ($path == "/app/feedback/view" ){
+        $feedback = Feedback::find($_GET["id"]);
+        if ($feedback) {
+            include('views/view.php');
+        }
+        else echo "not found";
     }
 }
+
 app();
+
+
+

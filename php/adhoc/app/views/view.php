@@ -12,19 +12,19 @@
         <div class="form-group">
             <label>
                 Nome:
-                <?=$name?>
+                <?=$feedback->nome?>
             </label>
         </div>
         <div class="form-group">
             <label>
                 Email:
-                <?=$email?>
+                <?=$feedback->email?>
             </label>
         </div>
         <div class="form-group">
             <label>
                 Feddback:
-                <?=$feedback?>
+                <?=$feedback->feedback?>
             </label>
         </div>
 </div>

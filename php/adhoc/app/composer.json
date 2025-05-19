@@ -5,6 +5,7 @@
         "vendor-dir": "/vendor"
     },
     "require": {
-        "php": ">=8.2.0"
+        "php": ">=8.2.0",
+        "illuminate/database": "12.4.*"
     }
 }

@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator">
-      <change afterPath="$PROJECT_DIR$/app/views/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/app/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1746640927634</updated>
       <workItem from="1746640929862" duration="23669000" />
-      <workItem from="1747243333593" duration="1549000" />
+      <workItem from="1747243333593" duration="1574000" />
     </task>
     <task id="LOCAL-00001" summary="Python com orator">
       <option name="closed" value="true" />
