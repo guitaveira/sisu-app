@@ -48,6 +48,11 @@ function app() {
             include('views/view.php');
         }
         else echo "not found";
+    }elseif ($path == "/app/feedback/index" ){
+        $feedbacks = Feedback::all();
+        include('views/index.php');
+        $asdsad= new "\\app\Controller\FeedbackController"();
+        $asdsad->{"create"}($dd);
     }
 }
 

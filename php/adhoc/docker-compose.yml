@@ -39,4 +39,5 @@ services:
       DB_USER: $APP_USER
       DB_DATABSE: $APP_DB
       DB_PASSWORD: $APP_PASS
+    command:  bash -c "composer install && php-fpm"
     #Nao publique porta
