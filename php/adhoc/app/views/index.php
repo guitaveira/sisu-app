@@ -26,6 +26,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Feedback</th>
+            <th scope="col" class="actions-column">Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,10 @@
                <td><?=$feedback->nome?></td>
                <td><?=$feedback->email?></td>
                <td><?=htmlspecialchars($feedback->feedback)?></td>
+               <td class="actions-column">
+                   <a href="/app/feedback/view?id=<?=$feedback->id?>" class="btn btn-info btn-sm" role="button">Visualizar</a>
+                   <a href="/app/feedback/delete?id=<?=$feedback->id?>" class="btn btn-danger btn-sm" role="button">Apagar</a>
+               </td>
            </tr>
            </tr>
         <?php endforeach; ?>

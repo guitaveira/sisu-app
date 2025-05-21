@@ -2,5 +2,27 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/brick/math" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/carbonphp/carbon-doctrine-types" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/doctrine/inflector" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/collections" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/conditionable" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/container" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/contracts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/database" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/macroable" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/illuminate/support" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/laravel/serializable-closure" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/nesbot/carbon" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/psr/clock" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/psr/container" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/psr/simple-cache" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/clock" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/deprecation-contracts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/polyfill-mbstring" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/polyfill-php83" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/translation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/symfony/translation-contracts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/vendor/voku/portable-ascii" vcs="Git" />
   </component>
 </project>

@@ -33,7 +33,23 @@ class FeedbackController
         $feedback = Feedback::find($id);
         if ($feedback) {
             include('views/view.php');
+            return;
         }
+        http_response_code(404);
+        include ('views/404.php');
     }
 
+    public  function delete($id)
+    {
+        $feedback =is_numeric($id)?Feedback::find($id):null;
+        if ($feedback) {
+            $feedback->delete();
+            http_response_code(302);
+            $redirect_url = "/app/feedback/index";
+            header("Location: " . $redirect_url);
+            return;
+        }
+        http_response_code(404);
+        include ('views/404.php');
+    }
 }
