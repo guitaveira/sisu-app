@@ -1,7 +1,7 @@
 FROM php:8.2-fpm-bullseye
 #sempre use versoes numeradas
 RUN apt update
-RUN apt-get install git -y
+RUN apt-get install unzip git -y
 RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 COPY app /app
