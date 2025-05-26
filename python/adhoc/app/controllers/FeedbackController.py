@@ -21,8 +21,6 @@ class FeedbackController(Controller):
             feedback.feedback = escape(form.getvalue("feedback"))
             if feedback.save():
                 self.redirectPage('/app/feedback/view?id=' + str(feedback.id))
-            else:
-                feedback.error='Email deve conter @'
 
         self.data = template.render(feedback=feedback)
 
@@ -39,11 +37,16 @@ class FeedbackController(Controller):
         feedback = Feedback.find(id[0])
         if feedback:
             feedback.delete()
+            self.session['flash'] = 'Feedback Deletado com sucesso'
             self.redirectPage("/app/feedback/index")
         else:
             self.notFound()
 
     def index(self):
         feedbacks = Feedback.all()
+        message=""
+        if 'flash' in self.session:
+            message=self.session['flash']
+            self.session['flash']=""
         template = self.env.get_template("index.html")
-        self.data = template.render(feedbacks=feedbacks)
+        self.data = template.render(feedbacks=feedbacks,message=message)

@@ -6,6 +6,7 @@ class Controller:
         self.data = ""
         self.status = "200 OK"
         self.redirect_url = ""
+        self.session = env['session']
         self.env = Environment(loader=FileSystemLoader(os.getcwd()+'/views' ))
     def redirectPage(self,url:str):
         self.status = "302 OK"

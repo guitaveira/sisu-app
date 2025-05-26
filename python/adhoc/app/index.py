@@ -9,6 +9,8 @@ def app(environ, start_response):
     path = environ['PATH_INFO']
     param = parse_qs(environ['QUERY_STRING'])
     session_id,session = get_session(environ)
+    environ['session']= session
+
     path_array = path.split('/')
     classname = path_array[2].capitalize() + 'Controller'
 

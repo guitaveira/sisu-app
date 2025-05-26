@@ -7,7 +7,9 @@ class Feedback(Model):
     def validate(self):
         if "@" in self.email:
             return True
-        return False
+        else:
+            self.error='Email deve conter @'
+            return False
 
     def save(self, **kwargs):
         if self.validate():
