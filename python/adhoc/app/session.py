@@ -6,9 +6,9 @@ def generate_session_id():
     return hashlib.sha256(os.urandom(64)).hexdigest()
 
 def get_session(environ):
-    cookies=environ.get('HTTP_COKKIE','')
+    cookies=environ.get('HTTP_COOKIE','')
     cookie_dict= dict(cookies.strip().slipt('=',1)
-                      for cookie in cookies.split(';') if '=' in cookies )
+                      for cookie in cookies.split(';') if '=' in cookie )
     session_id =cookie_dict['seesion_id']
 
     if session_id in SESSIONS:
