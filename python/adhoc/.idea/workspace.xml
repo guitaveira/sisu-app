@@ -5,21 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator">
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/autoload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/bin/carbon" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/ClassLoader.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/InstalledVersions.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_classmap.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_files.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_namespaces.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_psr4.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_real.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/autoload_static.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/installed.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/installed.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/vendor/composer/platform_check.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +74,7 @@
       <workItem from="1747243333593" duration="1574000" />
       <workItem from="1747603122933" duration="3463000" />
       <workItem from="1747659765013" duration="153000" />
-      <workItem from="1747854267180" duration="2040000" />
+      <workItem from="1747854267180" duration="2062000" />
     </task>
     <task id="LOCAL-00001" summary="Python com orator">
       <option name="closed" value="true" />
