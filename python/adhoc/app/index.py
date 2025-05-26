@@ -3,11 +3,12 @@ from wsgiref import simple_server
 from urllib.parse import parse_qs
 from orator import DatabaseManager, Model
 import os
+from session import get_session
 
 def app(environ, start_response):
     path = environ['PATH_INFO']
     param = parse_qs(environ['QUERY_STRING'])
-
+    session_id,session = get_session(environ)
     path_array = path.split('/')
     classname = path_array[2].capitalize() + 'Controller'
 
@@ -18,6 +19,7 @@ def app(environ, start_response):
     start_response(instance.status, [
         ("Content-Type", "text/html"),
         ("location", instance.redirect_url),
+        ("Set-Cookie",f"session_id={session_id}; Path=/"),
         ("Content-Length", str(len(instance.data)))
     ])
     return [instance.data.encode()]

@@ -7,14 +7,15 @@ def generate_session_id():
 
 def get_session(environ):
     cookies=environ.get('HTTP_COOKIE','')
-    cookie_dict= dict(cookies.strip().slipt('=',1)
+    cookie_dict= dict(cookies.strip().split('=',1)
                       for cookie in cookies.split(';') if '=' in cookie )
-    session_id =cookie_dict['seesion_id']
 
-    if session_id in SESSIONS:
-        session= SESSIONS[session_id]
+
+    if 'session_id' in  cookie_dict:
+        session= SESSIONS[cookie_dict['session_id']]
     else:
         session_id = generate_session_id()
         session ={}
         SESSIONS[session_id] = session
+
     return session_id, session
