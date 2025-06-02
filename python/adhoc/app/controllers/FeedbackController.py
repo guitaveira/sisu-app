@@ -16,7 +16,7 @@ class FeedbackController(Controller):
         if method == "POST":
             self.loadForm(feedback)
             if feedback.save():
-                self.redirectPage('/app/feedback/view?id=' + str(feedback.id))
+                self.redirectPage('view', {'id': feedback.id})
 
         self.data = template.render(feedback=feedback)
 
@@ -36,7 +36,7 @@ class FeedbackController(Controller):
             if method == "POST":
                 self.loadForm(feedback)
                 if feedback.save():
-                    self.redirectPage('/app/feedback/view?id=' + str(feedback.id))
+                    self.redirectPage('view', {'id': feedback.id})
         else:
             self.notFound()
             return
@@ -49,7 +49,7 @@ class FeedbackController(Controller):
         if feedback:
             feedback.delete()
             self.session['flash'] = 'Feedback Deletado com sucesso'
-            self.redirectPage("/app/feedback/index")
+            self.redirectPage('index')
         else:
             self.notFound()
 
