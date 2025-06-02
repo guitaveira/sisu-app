@@ -10,24 +10,25 @@
 <body>
 <div class="container">
     <h1>Formulário Fedback</h1>
-    <form action="/app/feedback/create" method="post" >
+    <form action="/app/feedback/{{'update?id='~feedback.id if feedback.id
+     else 'create' }}" method="post" >
         <p class="text-danger"> {{feedback.error}}</p>
         <div class="form-group">
             <label>
                 Nome
-                <input type="text" class="form-control" name="nome"  placeholder="Digite seu nome" value= {{feedback.nome}} >
+                <input type="text" class="form-control" name="nome"  placeholder="Digite seu nome" value= "{{feedback.nome}}" >
             </label>
         </div>
         <div class="form-group">
             <label>
                 Email
-                <input type="text" class="form-control" name="email" placeholder="Digite seu email" value={{feedback.email}} >
+                <input type="text" class="form-control" name="email" placeholder="Digite seu email" value="{{feedback.email}}" >
             </label>
         </div>
         <div class="form-group">
             <label>
                 Feddback
-                <input type="text"  class="form-control" name="feedback"  placeholder="Digite seu feedback" value={{feedback.feedback}}>
+                <input type="text"  class="form-control" name="feedback"  placeholder="Digite seu feedback" value="{{feedback.feedback}}">
             </label>
         </div>
         <input type="submit" value="Enviar" class="btn btn-primary" >

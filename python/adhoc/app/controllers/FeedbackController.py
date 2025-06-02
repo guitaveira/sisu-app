@@ -28,6 +28,21 @@ class FeedbackController(Controller):
         else:
             self.notFound()
 
+    def update(self,id):
+        method = self.environ["REQUEST_METHOD"]
+        template = self.env.get_template("create.html")
+        feedback = Feedback.find(id[0])
+        if feedback:
+            if method == "POST":
+                self.loadForm(feedback)
+                if feedback.save():
+                    self.redirectPage('/app/feedback/view?id=' + str(feedback.id))
+        else:
+            self.notFound()
+            return
+
+        self.data = template.render(feedback=feedback)
+
 
     def delete(self,id):
         feedback = Feedback.find(id[0])
