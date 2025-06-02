@@ -3,7 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Remote Python 3.9.18 Docker Compose (app at [C:\e\phd_coder\Documents\Facul\PWEB2\programacao-web\python\docker-compose.yml])" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.8.20 Docker Compose (app at [C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\docker-compose.yml])" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

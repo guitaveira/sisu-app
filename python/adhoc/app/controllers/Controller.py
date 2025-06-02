@@ -1,5 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 import os
+import cgi
+from html import escape
 class Controller:
     def __init__(self,env):
         self.environ=env
@@ -8,6 +10,16 @@ class Controller:
         self.redirect_url = ""
         self.session = env['session']
         self.env = Environment(loader=FileSystemLoader(os.getcwd()+'/views' ))
+
+    def form2dict(self,form):
+        dict ={}
+        for  key in form:
+            dict[key]= escape(form.getvalue(key))
+        return dict
+    def loadForm(self,model):
+        form = cgi.FieldStorage(fp=self.environ["wsgi.input"], environ=self.environ)
+        model.fill(self.form2dict(form))
+
     def redirectPage(self,url:str):
         self.status = "302 OK"
         self.redirect_url = url

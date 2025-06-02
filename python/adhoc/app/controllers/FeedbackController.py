@@ -1,12 +1,11 @@
 from urllib.parse import parse_qs
 import sys
 sys.path.append('./app')
-import cgi
 from jinja2 import Environment, FileSystemLoader
 from models.Feedback import Feedback
 from controllers.Controller import Controller
 import os
-from html import escape
+
 
 class FeedbackController(Controller):
 
@@ -15,10 +14,7 @@ class FeedbackController(Controller):
         template = self.env.get_template("create.html")
         feedback = Feedback()
         if method == "POST":
-            form = cgi.FieldStorage(fp=self.environ["wsgi.input"], environ=self.environ)
-            feedback.nome= form.getvalue("name")
-            feedback.email = form.getvalue("email")
-            feedback.feedback = escape(form.getvalue("feedback"))
+            self.loadForm(feedback)
             if feedback.save():
                 self.redirectPage('/app/feedback/view?id=' + str(feedback.id))
 
@@ -50,3 +46,5 @@ class FeedbackController(Controller):
             self.session['flash']=""
         template = self.env.get_template("index.html")
         self.data = template.render(feedbacks=feedbacks,message=message)
+
+
