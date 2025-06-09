@@ -12,7 +12,7 @@ class Controller:
         self.redirect_url = ""
         self.session = env['session']
         self.nome=(self.__class__.__name__).lower()[:-len("controller")]
-        self.env = Environment(loader=FileSystemLoader(os.getcwd()+f'/views/{self.nome}' ))
+        self.env = Environment(loader=FileSystemLoader(os.getcwd()+f'/views/{self.nome}'))
 
     def form2dict(self,form):
         dict ={}
@@ -31,5 +31,5 @@ class Controller:
 
     def notFound(self):
         self.status = "404 Not Found"
-        template = self.env.get_template("404.html")
+        template = Environment(loader=FileSystemLoader(os.getcwd()+f'/views/public')).get_template("404.html")
         self.data=template.render()

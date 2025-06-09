@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator" />
+    <list default="true" id="4fb2292f-3195-459a-bc04-66793e9f7ee7" name="Changes" comment="Python com orator">
+      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/app/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../php/adhoc/app/models/Feedback.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../php/adhoc/app/models/Feedback.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Controller.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,10 +42,11 @@
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/e/phd_coder/Documents/Facul/PWEB2/pweb2025/python/adhoc/docker-compose.yml",
+    "last_opened_file_path": "C:/e/phd_coder/Documents/Facul/PWEB2/pweb2025/php/feedback-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,8 +64,9 @@
       <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views\feedback" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views" />
       <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views\feedback" />
+      <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views\public" />
+      <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app\views" />
       <recent name="C:\e\phd_coder\Documents\Facul\PWEB2\pweb2025\python\adhoc\app" />
     </key>
   </component>
@@ -95,6 +102,8 @@
       <workItem from="1747659765013" duration="153000" />
       <workItem from="1747854267180" duration="2062000" />
       <workItem from="1748180923556" duration="22806000" />
+      <workItem from="1748866951597" duration="12939000" />
+      <workItem from="1749057515249" duration="5753000" />
     </task>
     <task id="LOCAL-00001" summary="Python com orator">
       <option name="closed" value="true" />
