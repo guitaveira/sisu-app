@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeedbackResource\Pages;
-use App\Filament\Resources\FeedbackResource\RelationManagers;
 use App\Models\Feedback;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,8 +17,6 @@ class FeedbackResource extends Resource
     protected static ?string $model = Feedback::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-
 
     public static function form(Form $form): Form
     {
@@ -36,6 +33,16 @@ class FeedbackResource extends Resource
                     ->required()
                     ->columnSpanFull(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (auth()->user()->hasRole('user'))
+        {
+            $query->where('user_id',auth()->id());
+        }
+        return $query;
     }
 
     public static function table(Table $table): Table
@@ -56,7 +63,7 @@ class FeedbackResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

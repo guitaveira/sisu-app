@@ -11,6 +11,7 @@ class Feedback extends Model
     protected $fillable = [
         'nome',
         'email',
-        'feedback'
+        'feedback',
+        'user_id'
     ];
 }
