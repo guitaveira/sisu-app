@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+
+<div class="dashboard">
+    <h1 >Detalhes do Feedback</h1>
+    <div class="actionlist">
+        <h5>{{feedback.nome}}</h5>
+        <h5>Email: {{feedback.email}}</h5>
+
+        <p>Feedback: {{feedback.feedback}}</p>
+    </div>
+    <a href="/admin/myapp/feedback/" class="btn btn-secondary mt-4">Voltar</a>
+</div>
+{% endblock %}
+

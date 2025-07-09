@@ -1,42 +1,39 @@
 <?php
 namespace app\controllers;
 use app\models\Feedback;
-class FeedbackController
+use app\controllers\Controller;
+
+class FeedbackController  extends Controller
 {
     public  function create()
     {
         $feedback= New Feedback;
-        $erro="";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $feedback->nome=$_POST['name'];
-            $feedback->email=$_POST['email'];
-            $feedback->feedback= htmlspecialchars($_POST['feedback']);
-            if (strpos($feedback->email,"@")) {
-                if ($feedback->save()) {
-                    http_response_code(302);
-                    $redirect_url = "/app/feedback/view?id=$feedback->id";
-                    header("Location: " . $redirect_url);
-                }
-            } else {
-                $feedback->error="Email deve conter @";
+            $this->loadForm($feedback);
+            if ($feedback->save()) {
+                $this->redirect('view', ['id' => $feedback->id]);
             }
         }
-        include ('views/create.php');
+        include ('views/feedback/create.php');
     }
     public  function index()
     {
         $feedbacks = Feedback::all();
-        include('views/index.php');
+        $message="";
+        if (isset($_SESSION['flash']) ){
+            $message =$_SESSION['flash'];
+            $_SESSION['flash']= "";
+        }
+        include('views/feedback/index.php');
     }
     public  function view($id)
     {
         $feedback = Feedback::find($id);
         if ($feedback) {
-            include('views/view.php');
+            include('views/feedback/view.php');
             return;
         }
-        http_response_code(404);
-        include ('views/404.php');
+        $this->notFound();
     }
 
     public  function delete($id)
@@ -44,12 +41,10 @@ class FeedbackController
         $feedback =is_numeric($id)?Feedback::find($id):null;
         if ($feedback) {
             $feedback->delete();
-            http_response_code(302);
-            $redirect_url = "/app/feedback/index";
-            header("Location: " . $redirect_url);
+            $_SESSION['flash'] = 'Feedback Deletado com sucesso';
+            $this->redirect('index');
             return;
         }
-        http_response_code(404);
-        include ('views/404.php');
+        $this->notFound();
     }
 }
