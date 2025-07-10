@@ -12,7 +12,6 @@ class Feedback extends Model
         if (strpos($this->email, '@') !== false) {
             return true;
         }
-
         $this->error = 'Email deve conter @';
         return false;
     }

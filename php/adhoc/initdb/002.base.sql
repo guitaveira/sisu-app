@@ -36,3 +36,4 @@ CREATE TABLE public.feedback
     WITH (
         OIDS=FALSE
     );
+

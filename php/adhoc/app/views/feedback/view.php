@@ -14,8 +14,8 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title"><?=$feedback->nome?></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Email:<?=$feedback->nome?></h6>
+            <h5 class="card-title">Nome:<?=$feedback->nome?></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Email:<?=$feedback->email?></h6>
             <p class="card-text">Feedback:<?=$feedback->feedback?></p>
         </div>
     </div>

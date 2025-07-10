@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedbacks dos Usuários</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         body {
@@ -19,7 +20,9 @@
 </head>
 <body>
 <div class="container">
+    <a href="/app/feedback/create" class="btn btn-success btn-sm" role="button">Adicionar</a>
     <h1 class="text-center">Feedbacks Recebidos</h1>
+    <p class="text-info"> <?=$message?></p>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
         <tr>
@@ -40,7 +43,7 @@
                    <a href="/app/feedback/delete?id=<?=$feedback->id?>" class="btn btn-danger btn-sm" role="button">Apagar</a>
                </td>
            </tr>
-           </tr>
+
         <?php endforeach; ?>
         </tbody>
     </table>

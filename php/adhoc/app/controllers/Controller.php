@@ -4,24 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Controller
 {
-    /**
-     * @var string
-     */
-    protected string $data = "";
-
-    /**
-     * @var string
-     */
-    protected string $status = "200 OK";
 
     /**
      * @var string
      */
     protected string $controllerName = "";
-
-    /**
-     * @var string
-     */
 
 
     public function __construct()
@@ -64,10 +51,9 @@ class Controller
      */
     protected function redirect(string $path, ?array $params = null): void
     {
-        $this->status = "302 Found";
+        http_response_code(302);
         $url = "/app/{$this->controllerName}/{$path}";
         if (!empty($params)) {
-            // `http_build_query` is t  he PHP equivalent of Python's `urllib.parse.urlencode`.
             $url .= '?' . http_build_query($params);
         }
         header("Location: " . $url);
@@ -79,7 +65,6 @@ class Controller
     public function notFound()
     {
         http_response_code(404);
-        $this->status = "404 Not Found";
         $templatePath = getcwd() . '/views/public/404.php';
         if (file_exists($templatePath))
             include $templatePath;
