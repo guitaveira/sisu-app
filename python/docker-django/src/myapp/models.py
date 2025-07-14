@@ -8,7 +8,13 @@ class Feedback(models.Model):
     user= models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     class Meta:
         permissions=[
-            ('change_only_yours','Can  change  only yours feedbacks')
+            ('change_only_yours','Can  change  only yours feedbacks'),
+            ('feedback_list', "Listar  feedback API"),
+            ('feedback_retrieve', "Reuperar 1 registro  feedback API"),
+            ('feedback_update', "atualizar 1 registro  feedback API"),
+            ('feedback_partialupdate', "atualizar parcialmente  feedback API"),
+            ('feedback_create', "Adicionar feedback API"),
+            ('feedback_delete', "Deleter  feedback API"),
         ]
     def __str__(self):
         return self.nome
