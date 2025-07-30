@@ -1,4 +1,0 @@
-gevent==24.2.1
-psycopg2-binary
-jinja2
-orator==0.9.6
